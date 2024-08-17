@@ -37,6 +37,10 @@ public class HexSpaceManager : MonoBehaviour
         return ChildBoardManager != null;
     }
 
+    public void Occupy(HexOccupant occupant) {
+        Occupant = occupant;
+    }
+
     public void ZoomIn() {
         EventManager.ZoomIn?.Invoke();
     }

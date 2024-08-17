@@ -89,6 +89,9 @@ public abstract class HexBoardLayoutController : MonoBehaviour
             for(int j = 0; j < Board.GetLength(1); j++) {
                 
                 // Don't Create the Object if we don't want one
+                // THIS IS NOT A BUG DO NOT MESS THIS UP AGAIN
+                // THIS IS [i,j] AND NOT [j,i] BECAUSE OF HOW THE
+                // INDEXES IN 2D ARRAYS WORK
                 if(Configuration[i, j] == 0) {
                     continue;
                 }
@@ -99,6 +102,13 @@ public abstract class HexBoardLayoutController : MonoBehaviour
 
                 HexSpaceManager hexGameObject = Instantiate(hexObject, hexesTransform).GetComponent<HexSpaceManager>();
                 hexGameObject.Init(boardManager, childBoardManager, coordinate);
+
+                // TODO: REMOVE THIS WHEN DONE DEBUGGING
+                if(i != 0 && j == 2) {
+                    hexGameObject.Occupy(new HexOccupant());
+                    MeshRenderer meshRenderer = hexGameObject.gameObject.GetComponentInChildren<MeshRenderer>();
+                    meshRenderer.material.color = Color.red;
+                }
 
                 Board[j, i] = hexGameObject;
             }

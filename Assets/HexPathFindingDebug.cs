@@ -16,8 +16,7 @@ public class HexPathFindingDebug : MonoBehaviour
     }
 
     private void ShowPath() {
-        currentPath = PathFinder.GetPath(hexSpaceManager.ParentBoardManager, hexSpaceManager.Coordinate, new Vector2Int(2, 2));
-        Debug.Log("Found the path!");
+        currentPath = PathFinder.GetPath(hexSpaceManager.ParentBoardManager, hexSpaceManager.Coordinate, new Vector2Int(0, 2));
     }
 
     private void HidePath() {
@@ -26,13 +25,13 @@ public class HexPathFindingDebug : MonoBehaviour
 
     private void OnDrawGizmos() {
 
-        if(currentPath == null) {
+        if(currentPath == null || hexSpaceManager.IsOccupied()) {
             return;
         }
 
         for(int i = 0; i <= currentPath.Count - 2; i++) {
             Gizmos.color = Color.red;
-            Gizmos.DrawLine(currentPath[i].transform.position + Vector3.up, currentPath[i+1].transform.position + Vector3.up);
+            Gizmos.DrawLine(currentPath[i].transform.position, currentPath[i+1].transform.position);
         }
     }
 }

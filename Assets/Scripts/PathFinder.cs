@@ -50,6 +50,7 @@ public static class PathFinder
             }
 
             openList.Remove(currentNode);
+            closedList.Add(currentNode);
 
             foreach(PathNode neighborNode in GetNeighbors(currentNode, grid)) {
                 
@@ -67,7 +68,7 @@ public static class PathFinder
                 if(tentativeGCost < neighborNode.GCost) {
                     neighborNode.CameFrom = currentNode;
                     neighborNode.GCost = tentativeGCost;
-                    neighborNode.HCost = boardManager.LayoutController.CalculateDistance(currentNode.Hex.Coordinate, endNode.Hex.Coordinate);;
+                    neighborNode.HCost = boardManager.LayoutController.CalculateDistance(neighborNode.Hex.Coordinate, endNode.Hex.Coordinate);;
                 }
 
                 if(!openList.Contains(neighborNode)) {
@@ -93,9 +94,8 @@ public static class PathFinder
         List<HexSpaceManager> path = new List<HexSpaceManager>();
         
         PathNode currentNode = endNode;
-        
-        while(currentNode != null) {
-            path.Add(currentNode.Hex);
+        while(currentNode.CameFrom != null) {
+            path.Add(currentNode.CameFrom.Hex);
             currentNode = currentNode.CameFrom;
         }
         
