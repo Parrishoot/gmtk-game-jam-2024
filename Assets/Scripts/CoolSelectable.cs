@@ -10,7 +10,6 @@ public class CoolSelectable : MonoBehaviour
     public Action OnHoverStop { get; set; }
 
     private void OnMouseDown() {
-        Debug.Log("Click!");
         OnClick?.Invoke();
     }
 

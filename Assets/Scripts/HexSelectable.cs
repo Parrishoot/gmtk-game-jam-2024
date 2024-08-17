@@ -17,6 +17,9 @@ public class HexSelectable : MonoBehaviour
     void Start()
     {
         selectable.OnClick += CheckZoom;
+        
+        selectable.OnHoverStart += () => hexSpaceManager.EventManager.HoverStart?.Invoke();
+        selectable.OnHoverStop += () => hexSpaceManager.EventManager.HoverEnd?.Invoke();
 
         hexSpaceManager.ParentBoardManager.EventManager.EnableBoard += TurnOn;
         hexSpaceManager.ParentBoardManager.EventManager.DisableBoard += TurnOff;
@@ -32,6 +35,7 @@ public class HexSelectable : MonoBehaviour
 
     private void CheckZoom() {
         if(isSelectable) {
+            hexSpaceManager.EventManager.Clicked?.Invoke();
             hexSpaceManager.ZoomIn();
         }
     }

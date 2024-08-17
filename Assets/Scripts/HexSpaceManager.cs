@@ -12,6 +12,8 @@ public class HexSpaceManager : MonoBehaviour
 
     public BoardManager ChildBoardManager { get; private set; }
 
+    public HexOccupant Occupant { get; private set; }
+
     public void Init(BoardManager parentBoardController, BoardManager childBoardController, Vector2Int coordinate) {
         
         this.ParentBoardManager = parentBoardController;
@@ -53,5 +55,9 @@ public class HexSpaceManager : MonoBehaviour
 
     public void Hide() {
         EventManager.Hide?.Invoke();
+    }
+
+    public bool IsOccupied() {
+        return Occupant != null;
     }
 }

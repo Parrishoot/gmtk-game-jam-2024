@@ -21,6 +21,14 @@ public class FlatHexBoardLayoutController : HexBoardLayoutController
         {0, 0, 1, 0, 0}
     };
 
+    public override CubedCoordinate GetCubedCoordinates(Vector2Int a)
+    {
+        int q = a.x;
+        int r = a.y - (a.x - (a.x % 2)) / 2;
+
+        return new CubedCoordinate(q, r, -(q + r));
+    }
+
     public override Vector3 GetPositionForCoordinate(Vector2Int coordinate)
     {
         return new Vector3((coordinate.x - Mathf.Floor(Board.GetLength(0) / 2)) * HexHorizontalOffset, 

@@ -40,6 +40,8 @@ public abstract class HexBoardLayoutController : MonoBehaviour
 
     public abstract Vector3 GetPositionForCoordinate(Vector2Int coordinate);
 
+    public abstract CubedCoordinate GetCubedCoordinates(Vector2Int a);
+
     public List<HexSpaceManager> GetAdjacentObjects(Vector2Int coordinate) {
         
         int hexOffset = coordinate.y  % 2;
@@ -123,5 +125,19 @@ public abstract class HexBoardLayoutController : MonoBehaviour
         childBoardManager.transform.localPosition = GetPositionForCoordinate(coordinate);
         
         return childBoardManager;
+    }
+
+    public int CalculateDistance(Vector2Int a, Vector2Int b) {
+
+        CubedCoordinate aCubed = GetCubedCoordinates(a);
+        CubedCoordinate bCubed = GetCubedCoordinates(b);
+
+        Vector3 cube = new Vector3(
+            aCubed.q - bCubed.q,
+            aCubed.r - bCubed.r,
+            aCubed.s - bCubed.s
+        );
+
+        return (int) ((Mathf.Abs(cube.x) + Mathf.Abs(cube.y) + Mathf.Abs(cube.z)) / 2);
     }
 }

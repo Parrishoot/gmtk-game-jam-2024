@@ -6,6 +6,9 @@ public class ActiveHexManager : Singleton<ActiveHexManager>
 {
     public HexSpaceManager ActiveHex { get; set ; }
 
+    // FOR DEBUGGING
+    public HexSpaceManager HoverHex { get; set ; }
+
     // Update is called once per frame
     void Update()
     {

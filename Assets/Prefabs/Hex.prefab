@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2193642687813896866}
   - component: {fileID: 8316846325771831540}
   - component: {fileID: 8067440783394146834}
+  - component: {fileID: 6992277964957178020}
   m_Layer: 0
   m_Name: Hex
   m_TagString: Untagged
@@ -90,6 +91,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectable: {fileID: 963358656707510464}
   hexCollider: {fileID: 3360279486597240213}
+  hexSpaceManager: {fileID: 8268788459877509288}
+--- !u!114 &6992277964957178020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6762952599826819983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13e75b293856fb54c9c02cfee80128ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   hexSpaceManager: {fileID: 8268788459877509288}
 --- !u!1 &8700872866264103154
 GameObject:

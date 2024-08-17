@@ -14,4 +14,10 @@ public class HexEventManager : MonoBehaviour
     public Action FadeIn;
 
     public Action Hide;
+
+    public Action Clicked;
+
+    public Action HoverStart;
+
+    public Action HoverEnd;
 }
