@@ -9,7 +9,7 @@ public abstract class TurnController : StateMachine
 
     public abstract void StartTurn();
 
-    public void EndTurn() {
+    public virtual void EndTurn() {
         TurnOver?.Invoke();
     }
 }

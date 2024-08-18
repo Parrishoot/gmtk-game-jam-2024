@@ -33,7 +33,7 @@ public class EnemyActionSelectState : GenericState<EnemyTurnManager>
     }
 
     private void End() {
-        GameManager.Instance.EndCurrentTurn();
         StateMachine.ChangeState(StateMachine.IdleState);
+        GameManager.Instance.EndCurrentTurn();
     }
 }

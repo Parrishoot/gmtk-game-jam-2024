@@ -17,5 +17,13 @@ public class PlayerTurnManager : TurnController
     {
         IdleState = new EmptyState(this);
         PlayerActionSelectState = new PlayerActionSelectState(this);
+
+        ChangeState(IdleState);
+    }
+
+    public override void EndTurn()
+    {
+        ChangeState(IdleState);
+        base.EndTurn();
     }
 }

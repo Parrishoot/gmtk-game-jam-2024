@@ -17,5 +17,7 @@ public class EnemyTurnManager : TurnController
     {
         IdleState = new EmptyState(this);
         EnemyActionSelectState = new EnemyActionSelectState(this);
+
+        ChangeState(IdleState);
     }
 }

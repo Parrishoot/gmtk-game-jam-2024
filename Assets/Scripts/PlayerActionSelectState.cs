@@ -9,7 +9,7 @@ public class PlayerActionSelectState : GenericState<PlayerTurnManager>
 
     public PlayerActionSelectState(PlayerTurnManager stateMachine) : base(stateMachine)
     {
-        GameManager.Instance.TurnEnded += Stop;
+        
     }
 
     public override void OnEnd()
@@ -22,12 +22,8 @@ public class PlayerActionSelectState : GenericState<PlayerTurnManager>
         HexMasterManager.Instance.OnHexClicked += CheckDisplayActions;
     }
 
-    private void Stop(CharacterType characterType)
+    private void Stop()
     {
-        if(characterType != CharacterType.PLAYER) {
-            return;
-        }
-
         StateMachine.ChangeState(StateMachine.IdleState);
     }
 

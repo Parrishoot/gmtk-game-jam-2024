@@ -23,7 +23,7 @@ public abstract class TargetableActionControllerBase : CharacterActionController
         
     }
 
-    public void ProcessSelection(HexSpaceManager manager)
+    public virtual void ProcessSelection(HexSpaceManager manager)
     {
         if(!TargetableHexes.Contains(manager)) {
             Debug.Log("Clicking hex without a valid target - not processing");

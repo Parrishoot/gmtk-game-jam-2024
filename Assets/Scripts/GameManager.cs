@@ -38,8 +38,8 @@ public class GameManager : Singleton<GameManager>
 
     public void EndCurrentTurn() {
         
-        TurnEnded?.Invoke(currentControllingPlayer);
         turnControllers[currentControllingPlayer].EndTurn();
+        TurnEnded?.Invoke(currentControllingPlayer);
 
         currentControllingPlayer = currentControllingPlayer == CharacterType.PLAYER ? CharacterType.ENEMY : CharacterType.PLAYER;
 
@@ -49,7 +49,7 @@ public class GameManager : Singleton<GameManager>
     private void StartTurn(CharacterType characterType) {
         currentControllingPlayer = characterType;
         
-        TurnStarted?.Invoke(currentControllingPlayer);
         turnControllers[currentControllingPlayer].StartTurn();
+        TurnStarted?.Invoke(currentControllingPlayer);
     }
 }

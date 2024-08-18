@@ -29,6 +29,18 @@ public class MovementActionController : TargetableActionController<MovementActio
         characterManager.MovementController.Move(availablePaths[selectedHex]);
     }
 
+    public override void ProcessSelection(HexSpaceManager manager)
+    {
+        if(!TargetableHexes.Contains(manager)) {
+            Debug.Log("Clicking hex without a valid target - not processing");
+            return;
+        }
+
+        ResetTargets();
+
+        PerformAction(manager);
+    }
+
     protected override Color TargetColor()
     {
         return Color.yellow;
