@@ -6,13 +6,19 @@ public class HexSpaceManager : MonoBehaviour
     [field:SerializeReference]
     public HexEventManager EventManager { get; private set; }
 
+    [field:SerializeField]
+    public Transform OccupantPivot { get; private set; }
+
+    [field:SerializeReference]
+    public MaterialController MaterialController {get; private set; }
+
     public Vector2Int Coordinate { get; private set; }
 
     public BoardManager ParentBoardManager { get; private set; }
 
     public BoardManager ChildBoardManager { get; private set; }
 
-    public HexOccupant Occupant { get; private set; }
+    public HexOccupantManager Occupant { get; private set; }
 
     public void Init(BoardManager parentBoardController, BoardManager childBoardController, Vector2Int coordinate) {
         
@@ -33,12 +39,12 @@ public class HexSpaceManager : MonoBehaviour
         return ParentBoardManager.transform.position + ParentBoardManager.LayoutController.GetPositionForCoordinate(Coordinate);
     }
 
-    public bool ContainsBoard() {
-        return ChildBoardManager != null;
+    public int DistanceToHex(HexSpaceManager targetHex) {
+        return ParentBoardManager.LayoutController.CalculateDistance(Coordinate, targetHex.Coordinate);
     }
 
-    public void Occupy(HexOccupant occupant) {
-        Occupant = occupant;
+    public bool ContainsBoard() {
+        return ChildBoardManager != null;
     }
 
     public void ZoomIn() {
@@ -63,5 +69,21 @@ public class HexSpaceManager : MonoBehaviour
 
     public bool IsOccupied() {
         return Occupant != null;
+    }
+
+    public void Occupy(HexOccupantManager occupant) {
+
+        if(occupant.Hex != null) {
+            occupant.Hex.ClearOccupant();
+        }
+
+        Occupant = occupant;
+        occupant.Hex = this;
+        occupant.transform.SetParent(OccupantPivot);
+    }
+
+    public void ClearOccupant() {   
+        Occupant.transform.parent = null;
+        Occupant = null;
     }
 }

@@ -104,11 +104,11 @@ public abstract class HexBoardLayoutController : MonoBehaviour
                 hexGameObject.Init(boardManager, childBoardManager, coordinate);
 
                 // TODO: REMOVE THIS WHEN DONE DEBUGGING
-                if(i != 0 && j == 2) {
-                    hexGameObject.Occupy(new HexOccupant());
-                    MeshRenderer meshRenderer = hexGameObject.gameObject.GetComponentInChildren<MeshRenderer>();
-                    meshRenderer.material.color = Color.red;
-                }
+                // if(i != 0 && j == 2) {
+                //     hexGameObject.Occupy(new HexOccupant());
+                //     MeshRenderer meshRenderer = hexGameObject.gameObject.GetComponentInChildren<MeshRenderer>();
+                //     meshRenderer.material.color = Color.red;
+                // }
 
                 Board[j, i] = hexGameObject;
             }

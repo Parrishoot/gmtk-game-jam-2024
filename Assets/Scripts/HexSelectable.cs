@@ -16,7 +16,7 @@ public class HexSelectable : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        selectable.OnClick += CheckZoom;
+        selectable.OnClick += ProcessClick;
         
         selectable.OnHoverStart += () => hexSpaceManager.EventManager.HoverStart?.Invoke();
         selectable.OnHoverStop += () => hexSpaceManager.EventManager.HoverEnd?.Invoke();
@@ -33,11 +33,15 @@ public class HexSelectable : MonoBehaviour
         } 
     }
 
-    private void CheckZoom() {
-        if(isSelectable) {
-            hexSpaceManager.EventManager.Clicked?.Invoke();
-            hexSpaceManager.ZoomIn();
-        }
+    private void ProcessClick() {
+
+        HexMasterManager.Instance.OnHexClicked?.Invoke(hexSpaceManager);
+
+        // TODO: TURN THIS BACK ON
+        // if(isSelectable) {
+        //     hexSpaceManager.EventManager.Clicked?.Invoke();
+        //     hexSpaceManager.ZoomIn();
+        // }
     }
 
     private void TurnOn() {

@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActiveHexManager : Singleton<ActiveHexManager>
+public class HexMasterManager : Singleton<HexMasterManager>
 {
+    public Action<HexSpaceManager> OnHexClicked { get; set; }
+
     public HexSpaceManager ActiveHex { get; set ; }
 
     // FOR DEBUGGING

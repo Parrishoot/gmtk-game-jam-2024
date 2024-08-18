@@ -93,7 +93,9 @@ public static class PathFinder
         
         List<HexSpaceManager> path = new List<HexSpaceManager>();
         
+        path.Add(endNode.Hex);
         PathNode currentNode = endNode;
+        
         while(currentNode.CameFrom != null) {
             path.Add(currentNode.CameFrom.Hex);
             currentNode = currentNode.CameFrom;

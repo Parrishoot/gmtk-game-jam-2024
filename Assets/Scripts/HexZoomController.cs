@@ -11,9 +11,6 @@ public class HexZoomController : MonoBehaviour
     [SerializeField]
     private CoolSelectable hexSelectable;
 
-    [SerializeField]
-    private MeshRenderer hexMeshRenderer;
-
     private const float ZOOM_AMOUNT = 5f;
 
     // Start is called before the first frame update
@@ -26,19 +23,17 @@ public class HexZoomController : MonoBehaviour
         hexSpaceManager.EventManager.FadeOut += FadeOut;
 
         hexSpaceManager.EventManager.Hide += Hide;
-
-        hexSelectable.OnClick += hexSpaceManager.ZoomIn; 
     }
 
     public void ZoomIn() {
 
         // Only allow one highlighted Hex at a time
         // TODO: Change this if I need to add more than 1 layer
-        if(ActiveHexManager.Instance.ActiveHex != null || !hexSpaceManager.ContainsBoard()) {
+        if(HexMasterManager.Instance.ActiveHex != null || !hexSpaceManager.ContainsBoard()) {
             return;
         }
 
-        ActiveHexManager.Instance.ActiveHex = hexSpaceManager;
+        HexMasterManager.Instance.ActiveHex = hexSpaceManager;
         CameraPivotController.Instance.SetHexHighlight(hexSpaceManager);
 
         // Scale the parent and slide it back at the same rate
@@ -60,11 +55,11 @@ public class HexZoomController : MonoBehaviour
 
         // Only allow one highlighted Hex at a time
         // TODO: Change this if I need to add more than 1 layer
-        if(ActiveHexManager.Instance.ActiveHex != hexSpaceManager) {
+        if(HexMasterManager.Instance.ActiveHex != hexSpaceManager) {
             return;
         }
 
-        ActiveHexManager.Instance.ActiveHex = hexSpaceManager;
+        HexMasterManager.Instance.ActiveHex = hexSpaceManager;
         CameraPivotController.Instance.ResetPosition();
 
         transform.parent.DOScale(Vector3.one, TransitionConfig.ZOOM_TIME).SetEase(TransitionConfig.ZOOM_TWEEN_TYPE);
@@ -80,17 +75,14 @@ public class HexZoomController : MonoBehaviour
     } 
 
     private void FadeIn() {
-        hexMeshRenderer.material.DOFade(1f, TransitionConfig.ZOOM_TIME).SetEase(TransitionConfig.ZOOM_TWEEN_TYPE);
+        hexSpaceManager.MaterialController.FadeIn(TransitionConfig.ZOOM_TIME, TransitionConfig.ZOOM_TWEEN_TYPE);
     }
 
     private void FadeOut() {
-        hexMeshRenderer.material.DOFade(0f, TransitionConfig.ZOOM_TIME).SetEase(TransitionConfig.ZOOM_TWEEN_TYPE);
+        hexSpaceManager.MaterialController.FadeIn(TransitionConfig.ZOOM_TIME, TransitionConfig.ZOOM_TWEEN_TYPE);
     }
 
     private void Hide() {
-        Color color = hexMeshRenderer.material.color;
-        color.a = 0f;
-
-        hexMeshRenderer.material.color = color;
+        hexSpaceManager.MaterialController.Hide();
     }
 }

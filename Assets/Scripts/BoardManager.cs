@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
@@ -37,6 +38,34 @@ public class BoardManager : MonoBehaviour
                 }
             }    
         }
+    }
+
+    public List<HexSpaceManager> FindAllHexes(Predicate<HexSpaceManager> filter) {
+        
+        List<HexSpaceManager> matchingHexes = new List<HexSpaceManager>();
+
+        for(int i = 0; i < LayoutController.Board.GetLength(0); i++) {
+            for(int j = 0; j < LayoutController.Board.GetLength(1); j++) {
+                
+                Vector2Int coordinate = new Vector2Int(j, i);
+                
+                if(LayoutController.Valid(coordinate) &&
+                    filter(LayoutController.Board[j,i])) {
+                        matchingHexes.Add(LayoutController.Board[j,i]);
+                }
+            }    
+        }
+
+        return matchingHexes;
+    }
+
+    public HexSpaceManager GetClosestOpenHexTo(Vector2Int coordinate) {
+        return LayoutController
+            .Board
+            .Flatten()
+            .Where(x => x != null && !x.IsOccupied())
+            .OrderByDescending(x => LayoutController.CalculateDistance(coordinate, x.Coordinate))
+            .First();
     }
 
     public void ZoomIn()

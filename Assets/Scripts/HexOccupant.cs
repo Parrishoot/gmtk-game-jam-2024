@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HexOccupant
+public class HexOccupantManager: MonoBehaviour
 {
-    // TODO: This part
+    public HexSpaceManager Hex { get; set; }
 }
