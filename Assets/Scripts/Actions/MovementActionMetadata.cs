@@ -4,11 +4,8 @@ using UnityEngine;
 
 
 [CreateAssetMenu(fileName = "MovementAction", menuName = "ScriptableObjects/ActionMeta/MovementAction", order = 1)]
-public class MovementActionMetadata : ActionMetadata
+public class MovementActionMetadata : TargetableActionMetadata
 {
-    [field:SerializeField]
-    public int MovementDistance { get; set; } = 2;
-
     public override CharacterActionController GetController(CharacterManager moveableOccupantManager)
     {
         return new MovementActionController(moveableOccupantManager, this);
@@ -16,6 +13,6 @@ public class MovementActionMetadata : ActionMetadata
 
     public override string GetDescription()
     {
-        return "Move " + MovementDistance + " Spaces";
+        return "Move " + Range.ToString() + " Spaces";
     }
 }

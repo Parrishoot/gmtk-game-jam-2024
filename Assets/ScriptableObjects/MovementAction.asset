@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: MovementAction
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Basic Movement
-  <MovementDistance>k__BackingField: 2
+  <Range>k__BackingField: 2

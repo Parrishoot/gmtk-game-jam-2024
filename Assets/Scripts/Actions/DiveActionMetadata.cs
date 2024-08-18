@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Dive", menuName = "ScriptableObjects/ActionMeta/Dive", order = 4)]
-public class DiveActionMetadata : ActionMetadata
+public class DiveActionMetadata : TargetableActionMetadata
 {
-
-    [field:SerializeReference]
-    public int Range { get; set; } = 1;
 
     public override CharacterActionController GetController(CharacterManager occupantManager)
     {

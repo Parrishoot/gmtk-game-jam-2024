@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "HealAction", menuName = "ScriptableObjects/ActionMeta/HealAction", order = 3)]
-public class HealActionMetadata : ActionMetadata
+public class HealActionMetadata : TargetableActionMetadata
 {
     [field:SerializeReference]    
     public int HealAmount { get; private set; } = 2;   
-
-    [field:SerializeReference]
-    public int Range { get; private set; } = 1;    
 
     public override CharacterActionController GetController(CharacterManager occupantManager)
     {
