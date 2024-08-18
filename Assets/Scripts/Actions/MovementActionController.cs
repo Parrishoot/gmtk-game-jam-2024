@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,7 +20,7 @@ public class MovementActionController : CharacterActionControllerWithMetadata<Mo
 
             List<HexSpaceManager> path = PathFinder.GetPath(hex.ParentBoardManager, hex.Coordinate, targetHex.Coordinate);
 
-            if(path != null) {
+            if(path != null && path.Count <= Meta.MovementDistance + 1) {
                 targetHex.MaterialController.SetColor(Color.yellow);
                 availablePaths[targetHex] = path; 
             }

@@ -36,4 +36,8 @@ public class HealthController : MonoBehaviour
         currentHealth = Math.Min(currentHealth + healAmount, health);
         OnHeal?.Invoke();
     }
+
+    public bool CanBeHealed() {
+        return currentHealth < health;
+    }
 }
