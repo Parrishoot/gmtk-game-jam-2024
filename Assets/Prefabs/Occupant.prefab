@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 33862233747945905}
   - component: {fileID: 2352545947497639835}
   - component: {fileID: 5809223889946550463}
+  - component: {fileID: 3767043809758076842}
   m_Layer: 0
   m_Name: Occupant
   m_TagString: Untagged
@@ -79,6 +80,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <HealthController>k__BackingField: {fileID: 5809223889946550463}
+  <MaterialController>k__BackingField: {fileID: 3767043809758076842}
 --- !u!114 &5809223889946550463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,6 +94,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
+  currentHealth: 0
+--- !u!114 &3767043809758076842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3466039824535776048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8ef7096767b5804faa902c1e6eaad57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 7425520431675061731}
 --- !u!1 &4867543146511009606
 GameObject:
   m_ObjectHideFlags: 0

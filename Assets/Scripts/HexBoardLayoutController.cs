@@ -150,4 +150,8 @@ public abstract class HexBoardLayoutController : MonoBehaviour
 
         return (int) ((Mathf.Abs(cube.x) + Mathf.Abs(cube.y) + Mathf.Abs(cube.z)) / 2);
     }
+
+    public HexSpaceManager GetCenter() {
+        return Board[Board.GetLength(0) / 2, Board.GetLength(1) / 2];
+    }
 }

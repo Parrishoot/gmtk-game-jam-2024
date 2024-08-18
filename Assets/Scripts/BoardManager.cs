@@ -64,7 +64,7 @@ public class BoardManager : MonoBehaviour
             .Board
             .Flatten()
             .Where(x => x != null && !x.IsOccupied())
-            .OrderByDescending(x => LayoutController.CalculateDistance(coordinate, x.Coordinate))
+            .OrderBy(x => LayoutController.CalculateDistance(coordinate, x.Coordinate))
             .First();
     }
 
