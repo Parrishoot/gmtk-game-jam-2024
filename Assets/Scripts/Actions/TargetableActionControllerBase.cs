@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class TargetableActionControllerBase : CharacterActionController
 {
-    protected List<HexSpaceManager> targetableHexes = new List<HexSpaceManager>();
+    public List<HexSpaceManager> TargetableHexes { get; private set; } = new List<HexSpaceManager>();
 
     protected TargetableActionControllerBase(CharacterManager characterManager) : base(characterManager)
     {
@@ -19,23 +19,27 @@ public abstract class TargetableActionControllerBase : CharacterActionController
     
     public override void Cancel()
     {
-        foreach(HexSpaceManager targetHex in targetableHexes) {
-            targetHex.MaterialController.ResetColor();
-        }
-
-        characterManager.TargetSelector.CancelSelection(this);
+        ResetTargets();
+        
     }
 
     public void ProcessSelection(HexSpaceManager manager)
     {
-        if(!targetableHexes.Contains(manager)) {
+        if(!TargetableHexes.Contains(manager)) {
             Debug.Log("Clicking hex without a valid target - not processing");
             return;
         }
 
-        Cancel();
+        ResetTargets();
 
         PerformAction(manager);
         ActionEnded?.Invoke();
+    }
+
+    public void ResetTargets() {
+        foreach(HexSpaceManager targetHex in TargetableHexes) {
+            targetHex.MaterialController.ResetColor();
+        }
+        characterManager.TargetSelector.EndSelection(this);
     }
 }

@@ -18,7 +18,7 @@ where T: TargetableActionMetadata
 
         foreach(HexSpaceManager targetHex in hexesInDistance) {
             if(IsValidTargetSpace(targetHex)) {
-                targetableHexes.Add(targetHex);
+                TargetableHexes.Add(targetHex);
                 targetHex.MaterialController.SetColor(TargetColor());
             }
         }

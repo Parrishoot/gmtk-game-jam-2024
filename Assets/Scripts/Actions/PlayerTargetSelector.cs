@@ -14,7 +14,7 @@ public class PlayerTargetSelector : TargetSelector
         HexMasterManager.Instance.OnHexClicked += Process;
     }
 
-    public override void CancelSelection(TargetableActionControllerBase action)
+    public override void EndSelection(TargetableActionControllerBase action)
     {
         HexMasterManager.Instance.OnHexClicked -= Process;
     }
