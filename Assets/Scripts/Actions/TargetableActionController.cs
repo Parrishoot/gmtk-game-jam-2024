@@ -2,20 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class TargetableActionController<T> : CharacterActionControllerWithMetadata<T>
+public abstract class TargetableActionController<T> : TargetableActionControllerBase
 where T: TargetableActionMetadata
 {
-    private List<HexSpaceManager> targetableHexes = new List<HexSpaceManager>();
+    protected T Meta { get; private set; }
 
-    protected TargetableActionController(CharacterManager characterManager, T meta) : base(characterManager, meta)
+    protected TargetableActionController(CharacterManager characterManager, T meta) : base(characterManager)
     {
+        this.Meta = meta;
     }
-
-    protected abstract Color TargetColor();
-
-    protected abstract bool IsValidTargetSpace(HexSpaceManager targetHex);
-
-    protected abstract void PerformAction(HexSpaceManager selectedHex);
 
     public override void Begin()
     {
@@ -28,29 +23,6 @@ where T: TargetableActionMetadata
             }
         }
 
-        HexMasterManager.Instance.OnHexClicked += CheckTargetSelected;
-    }
-
-    
-    public override void Cancel()
-    {
-        foreach(HexSpaceManager targetHex in targetableHexes) {
-            targetHex.MaterialController.ResetColor();
-        }
-
-        HexMasterManager.Instance.OnHexClicked -= CheckTargetSelected;
-    }
-
-    private void CheckTargetSelected(HexSpaceManager manager)
-    {
-        if(!targetableHexes.Contains(manager)) {
-            Debug.Log("Clicking hex without a valid target - not processing");
-            return;
-        }
-
-        Cancel();
-
-        PerformAction(manager);
-        ActionEnded?.Invoke();
+        characterManager.TargetSelector.BeginSelection(this);
     }
 }

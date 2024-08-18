@@ -7,6 +7,9 @@ public class CharacterManager : HexOccupantManager
     [field:SerializeField]
     public CharacterActionPoolController ActionPool { get; private set; }
 
+    [field:SerializeReference]
+    public TargetSelector TargetSelector{ get; private set; }
+
     public MovementController MovementController { get; set; }
 
     public void Start() {
