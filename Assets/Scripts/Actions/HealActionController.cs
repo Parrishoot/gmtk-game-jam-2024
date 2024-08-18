@@ -17,13 +17,20 @@ public class HealActionController : CharacterActionControllerWithMetadata<HealAc
         hexesInDistance.Add(characterManager.Hex);
 
         foreach(HexSpaceManager targetHex in hexesInDistance) {
-            if(targetHex.Occupant != null && targetHex.Occupant.IsDamageable() && targetHex.Occupant.HealthController.CanBeHealed()) {
+            if(IsValidHealSpace(targetHex)) {
                 targetableHexes.Add(targetHex);
                 targetHex.MaterialController.SetColor(Color.green);
             }
         }
 
         HexMasterManager.Instance.OnHexClicked += CheckHeal;
+    }
+
+    private bool IsValidHealSpace(HexSpaceManager targetHex) {
+        return targetHex.Occupant != null && 
+                targetHex.Occupant.IsDamageable() && 
+                targetHex.Occupant.HealthController.CanBeHealed() && 
+                targetHex.Occupant.CharacterType == characterManager.CharacterType;
     }
 
     public override void Cancel()

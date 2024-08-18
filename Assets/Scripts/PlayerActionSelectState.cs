@@ -23,6 +23,7 @@ public class PlayerActionSelectState : GenericState<PlayerTurnManager>
 
     private void CheckDisplayActions(HexSpaceManager manager)
     {
+
         if(!manager.IsOccupied()) {
             return;
         }
@@ -38,7 +39,13 @@ public class PlayerActionSelectState : GenericState<PlayerTurnManager>
 
     public override void OnUpdate(float deltaTime)
     {
-        if(Input.GetMouseButtonDown(1) && currentCharacter != null) {
+        if(Input.GetMouseButtonDown(1)) {
+            CancelAction();
+        }
+    }
+
+    private void CancelAction() {
+        if(currentCharacter != null) {
             currentCharacter.ActionPool.CancelAction();
             MovePanelManager.Instance.Clear();
             currentCharacter = null;

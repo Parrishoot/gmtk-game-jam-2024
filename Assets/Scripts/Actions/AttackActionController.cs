@@ -16,10 +16,19 @@ public class AttackActionController : CharacterActionControllerWithMetadata<Atta
         List<HexSpaceManager> hexesInDistance = characterManager.Hex.GetHexesInRange(Meta.Range);
 
         foreach(HexSpaceManager targetHex in hexesInDistance) {
-            if(targetHex.Occupant != null && targetHex.Occupant.IsDamageable()) {
+            if(IsValidAttackSpace(targetHex)) {
                 targetableHexes.Add(targetHex);
+                targetHex.MaterialController.SetColor(Color.red);
             }
         }
+
+        HexMasterManager.Instance.OnHexClicked += CheckAttack;
+    }
+
+    private bool IsValidAttackSpace(HexSpaceManager targetHex) {
+        return targetHex.Occupant != null && 
+                targetHex.Occupant.IsDamageable() && 
+                targetHex.Occupant.CharacterType != characterManager.CharacterType;
     }
 
     public override void Cancel()
