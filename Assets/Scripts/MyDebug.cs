@@ -10,6 +10,9 @@ public class MyDebug : MonoBehaviour
     [SerializeField]
     private BoardManager boardManager;
 
+    [SerializeField]
+    private Vector2Int targetHex;
+
     private void OnEnable() {
         
     }
@@ -17,7 +20,7 @@ public class MyDebug : MonoBehaviour
     public void Update() {
         if(Input.GetKeyDown(KeyCode.Space)) {
             boardManager.GetClosestOpenHexTo(new Vector2Int(2, 2)).Occupy(hexOccupantManager);
-            hexOccupantManager.MovementController.Move(boardManager.LayoutController.Board[4, 2]);
+            hexOccupantManager.MovementController.Move(boardManager.LayoutController.Board[targetHex.y, targetHex.x]);
         }
     }
 }

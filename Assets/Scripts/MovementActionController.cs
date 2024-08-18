@@ -15,7 +15,7 @@ public class MovementActionController : CharacterActionControllerWithMetadata<Mo
     {
         // Find all reachable hexes within x distance from the current hex
         HexSpaceManager hex = occupantManager.Hex;
-        List<HexSpaceManager> hexesWithinDistance = hex.ParentBoardManager.FindAllHexes((targetHex) => hex.DistanceToHex(targetHex) <= Meta.MovementDistance && targetHex != hex);
+        List<HexSpaceManager> hexesWithinDistance = hex.GetHexesInRange(Meta.MovementDistance);
 
         foreach(HexSpaceManager targetHex in hexesWithinDistance) {
 

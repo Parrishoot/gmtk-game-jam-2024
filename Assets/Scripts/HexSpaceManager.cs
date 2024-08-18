@@ -39,6 +39,10 @@ public class HexSpaceManager : MonoBehaviour
         return ParentBoardManager.transform.position + ParentBoardManager.LayoutController.GetPositionForCoordinate(Coordinate);
     }
 
+    public List<HexSpaceManager> GetHexesInRange(int range) {
+        return ParentBoardManager.FindAllHexes((targetHex) => DistanceToHex(targetHex) <= range && targetHex != this);
+    }
+
     public int DistanceToHex(HexSpaceManager targetHex) {
         return ParentBoardManager.LayoutController.CalculateDistance(Coordinate, targetHex.Coordinate);
     }

@@ -42,6 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 33862233747945905}
   - component: {fileID: 2352545947497639835}
+  - component: {fileID: 5809223889946550463}
   m_Layer: 0
   m_Name: Occupant
   m_TagString: Untagged
@@ -77,6 +78,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35caf348b1d81e64d8828ed8290cbc0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <HealthController>k__BackingField: {fileID: 5809223889946550463}
+--- !u!114 &5809223889946550463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3466039824535776048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffff91c3679ba3d45a2b3eabd7c8005c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 10
 --- !u!1 &4867543146511009606
 GameObject:
   m_ObjectHideFlags: 0
