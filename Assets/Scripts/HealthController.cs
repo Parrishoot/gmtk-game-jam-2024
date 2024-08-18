@@ -14,30 +14,28 @@ public class HealthController : MonoBehaviour
 
     public Action OnHeal { get; set; }
 
-    // TODO: REMOVE THIS ANNOTATION AS IT'S NOT NECESSARY
-    [SerializeField]
-    private int currentHealth;
+    public int CurrentHealth { get; private set; }
 
     void Start() {
-        currentHealth = health;
+        CurrentHealth = health;
     }
 
     public void Damage(int damage) {
-        currentHealth -= damage;
+        CurrentHealth -= damage;
 
         OnHealthLost?.Invoke();
 
-        if(currentHealth <= 0) {
+        if(CurrentHealth <= 0) {
             OnDeath?.Invoke();
         }
     }
 
     public void Heal(int healAmount) {
-        currentHealth = Math.Min(currentHealth + healAmount, health);
+        CurrentHealth = Math.Min(CurrentHealth + healAmount, health);
         OnHeal?.Invoke();
     }
 
     public bool CanBeHealed() {
-        return currentHealth < health;
+        return CurrentHealth < health;
     }
 }

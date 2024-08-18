@@ -78,7 +78,6 @@ public static class PathFinder
         }
 
         // Inaccessible endpoint
-        Debug.LogWarning("No path!");
         return null;
     }
 
