@@ -5,7 +5,7 @@ using UnityEngine;
 public class MyDebug : MonoBehaviour
 {
     [SerializeField]
-    private MoveableOccupantManager hexOccupantManager;
+    private CharacterManager hexOccupantManager;
 
     [SerializeField]
     private BoardManager boardManager;

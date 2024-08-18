@@ -7,22 +7,28 @@ public class AttackActionController : CharacterActionControllerWithMetadata<Atta
 {
     private List<HexSpaceManager> targetableHexes = new List<HexSpaceManager>();
 
-    public AttackActionController(MoveableOccupantManager moveableOccupantManager, AttackActionMetadata meta) : base(moveableOccupantManager, meta)
+    public AttackActionController(CharacterManager moveableOccupantManager, AttackActionMetadata meta) : base(moveableOccupantManager, meta)
     {
     }
 
     public override void Begin()
     {
-        List<HexSpaceManager> hexesInDistance = occupantManager.Hex.GetHexesInRange(Meta.Range);
+        List<HexSpaceManager> hexesInDistance = characterManager.Hex.GetHexesInRange(Meta.Range);
 
         foreach(HexSpaceManager targetHex in hexesInDistance) {
             if(targetHex.Occupant != null && targetHex.Occupant.IsDamageable()) {
                 targetableHexes.Add(targetHex);
-                targetHex.MaterialController.SetColor(Color.red);
             }
         }
+    }
 
-        HexMasterManager.Instance.OnHexClicked += CheckAttack;
+    public override void Cancel()
+    {
+        foreach(HexSpaceManager targetHex in targetableHexes) {
+            targetHex.MaterialController.ResetColor();
+        }
+
+        HexMasterManager.Instance.OnHexClicked -= CheckAttack;
     }
 
     private void CheckAttack(HexSpaceManager manager)
@@ -32,11 +38,7 @@ public class AttackActionController : CharacterActionControllerWithMetadata<Atta
             return;
         }
 
-        foreach(HexSpaceManager targetHex in targetableHexes) {
-            targetHex.MaterialController.ResetColor();
-        }
-
-        HexMasterManager.Instance.OnHexClicked -= CheckAttack;
+        Cancel();
 
         manager.Occupant.HealthController.Damage(Meta.Damage);
         ActionEnded?.Invoke();

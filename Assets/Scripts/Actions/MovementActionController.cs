@@ -6,27 +6,37 @@ public class MovementActionController : CharacterActionControllerWithMetadata<Mo
     // Store the paths to avoid recalculating
     private Dictionary<HexSpaceManager, List<HexSpaceManager>> availablePaths = new Dictionary<HexSpaceManager, List<HexSpaceManager>>();
 
-    public MovementActionController(MoveableOccupantManager occupantManager, MovementActionMetadata meta) : base(occupantManager, meta)
+    public MovementActionController(CharacterManager occupantManager, MovementActionMetadata meta) : base(occupantManager, meta)
     {
     }
 
     public override void Begin()
     {
         // Find all reachable hexes within x distance from the current hex
-        HexSpaceManager hex = occupantManager.Hex;
+        HexSpaceManager hex = characterManager.Hex;
         List<HexSpaceManager> hexesWithinDistance = hex.GetHexesInRange(Meta.MovementDistance);
 
         foreach(HexSpaceManager targetHex in hexesWithinDistance) {
 
             List<HexSpaceManager> path = PathFinder.GetPath(hex.ParentBoardManager, hex.Coordinate, targetHex.Coordinate);
 
-            if(path != null && path.Count <= Meta.MovementDistance + 1) {
+            if(path != null && path.Count <= Meta.MovementDistance + 1 && !targetHex.ChildBoardManager.HasOccupants()) {
                 targetHex.MaterialController.SetColor(Color.yellow);
                 availablePaths[targetHex] = path; 
             }
         }
 
         HexMasterManager.Instance.OnHexClicked += CheckBeginMovement;
+    }
+
+    public override void Cancel()
+    {
+        
+        HexMasterManager.Instance.OnHexClicked -= CheckBeginMovement;
+
+        foreach(HexSpaceManager targetHex in availablePaths.Keys) {
+            targetHex.MaterialController.ResetColor();
+        }
     }
 
     private void CheckBeginMovement(HexSpaceManager manager)
@@ -36,14 +46,10 @@ public class MovementActionController : CharacterActionControllerWithMetadata<Mo
             return;
         }
 
-        HexMasterManager.Instance.OnHexClicked -= CheckBeginMovement;
+        Cancel();
 
-        foreach(HexSpaceManager targetHex in availablePaths.Keys) {
-            targetHex.MaterialController.ResetColor();
-        }
-
-        occupantManager.MovementController.OnMovementFinished += EndAction;
-        occupantManager.MovementController.Move(availablePaths[manager]);
+        characterManager.MovementController.OnMovementFinished += EndAction;
+        characterManager.MovementController.Move(availablePaths[manager]);
     }
 
     private void EndAction()

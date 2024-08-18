@@ -36,12 +36,12 @@ public class HexSelectable : MonoBehaviour
     private void ProcessClick() {
 
         HexMasterManager.Instance.OnHexClicked?.Invoke(hexSpaceManager);
+        hexSpaceManager.EventManager.Clicked?.Invoke();
 
         // TODO: TURN THIS BACK ON
-        // if(isSelectable) {
-        //     hexSpaceManager.EventManager.Clicked?.Invoke();
-        //     hexSpaceManager.ZoomIn();
-        // }
+        if(isSelectable && hexSpaceManager.ChildBoardManager != null && hexSpaceManager.ChildBoardManager.HasOccupants()) {   
+            hexSpaceManager.ZoomIn();
+        }
     }
 
     private void TurnOn() {

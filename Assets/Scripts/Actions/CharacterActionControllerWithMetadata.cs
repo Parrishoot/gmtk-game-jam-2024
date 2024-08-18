@@ -8,7 +8,7 @@ where T: ActionMetadata
 {
     public T Meta { get; private set; }
 
-    public CharacterActionControllerWithMetadata(MoveableOccupantManager moveableOccupantManager, T meta): base(moveableOccupantManager) {
+    public CharacterActionControllerWithMetadata(CharacterManager moveableOccupantManager, T meta): base(moveableOccupantManager) {
         this.Meta = meta;
     }
 }

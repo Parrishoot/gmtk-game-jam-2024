@@ -9,9 +9,11 @@ public abstract class CharacterActionController
 
     public abstract void Begin();
 
-    protected MoveableOccupantManager occupantManager { get; private set; }
+    public abstract void Cancel();
 
-    public CharacterActionController(MoveableOccupantManager occupantManager) {
-        this.occupantManager = occupantManager;
+    protected CharacterManager characterManager { get; private set; }
+
+    public CharacterActionController(CharacterManager characterManager) {
+        this.characterManager = characterManager;
     }
 }

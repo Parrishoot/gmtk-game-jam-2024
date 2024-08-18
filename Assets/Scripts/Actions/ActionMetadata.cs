@@ -8,7 +8,7 @@ public abstract class ActionMetadata : ScriptableObject
     [field:SerializeReference]
     public String Name { get; set; }
 
-    public abstract CharacterActionController GetController(MoveableOccupantManager occupantManager);
+    public abstract CharacterActionController GetController(CharacterManager occupantManager);
 
     public abstract String GetDescription();
 }

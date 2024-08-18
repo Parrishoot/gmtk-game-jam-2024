@@ -5,34 +5,21 @@ using UnityEngine;
 public class CharacterActionPoolController : MonoBehaviour
 {
     [SerializeField]
-    private MoveableOccupantManager moveableOccupantManager;
+    private CharacterManager characterManager;
 
     [SerializeField]
-    private List<ActionMetadata> actions;
+    public List<ActionMetadata> Actions;
 
     private CharacterActionController currentAction;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public void StartAction(ActionMetadata actionMetadata) {
+        currentAction = actionMetadata.GetController(characterManager);
+        currentAction.Begin();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.E)) {
-            if(currentAction == null) {
-
-                // TODO: ADD REAL LOGIC HERE
-                ActionMetadata action = actions[0];
-                currentAction = action.GetController(moveableOccupantManager);
-
-                Debug.Log("Performing: " + action.Name);
-
-                currentAction.ActionEnded += () => currentAction = null;
-                currentAction.Begin();
-            }
-        }    
+    public void CancelAction() {
+        if(currentAction != null) {
+            currentAction.Cancel();
+        }
     }
 }

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class HexOccupantManager: MonoBehaviour
 {
+    [field:SerializeReference]
+    public CharacterType CharacterType { get; private set; }
+
     [field:SerializeField]
     public HealthController HealthController { get; private set; }
 

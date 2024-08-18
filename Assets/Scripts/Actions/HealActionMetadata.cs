@@ -11,7 +11,7 @@ public class HealActionMetadata : ActionMetadata
     [field:SerializeReference]
     public int Range { get; private set; } = 1;    
 
-    public override CharacterActionController GetController(MoveableOccupantManager occupantManager)
+    public override CharacterActionController GetController(CharacterManager occupantManager)
     {
         return new HealActionController(occupantManager, this);
     }

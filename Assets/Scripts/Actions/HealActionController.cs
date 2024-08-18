@@ -7,14 +7,14 @@ public class HealActionController : CharacterActionControllerWithMetadata<HealAc
 {
     private List<HexSpaceManager> targetableHexes = new List<HexSpaceManager>();
 
-    public HealActionController(MoveableOccupantManager moveableOccupantManager, HealActionMetadata meta) : base(moveableOccupantManager, meta)
+    public HealActionController(CharacterManager moveableOccupantManager, HealActionMetadata meta) : base(moveableOccupantManager, meta)
     {
     }
 
     public override void Begin()
     {
-        List<HexSpaceManager> hexesInDistance = occupantManager.Hex.GetHexesInRange(Meta.Range);
-        hexesInDistance.Add(occupantManager.Hex);
+        List<HexSpaceManager> hexesInDistance = characterManager.Hex.GetHexesInRange(Meta.Range);
+        hexesInDistance.Add(characterManager.Hex);
 
         foreach(HexSpaceManager targetHex in hexesInDistance) {
             if(targetHex.Occupant != null && targetHex.Occupant.IsDamageable() && targetHex.Occupant.HealthController.CanBeHealed()) {
@@ -26,6 +26,15 @@ public class HealActionController : CharacterActionControllerWithMetadata<HealAc
         HexMasterManager.Instance.OnHexClicked += CheckHeal;
     }
 
+    public override void Cancel()
+    {
+        foreach(HexSpaceManager targetHex in targetableHexes) {
+            targetHex.MaterialController.ResetColor();
+        }
+
+        HexMasterManager.Instance.OnHexClicked -= CheckHeal;
+    }
+
     private void CheckHeal(HexSpaceManager manager)
     {
         if(!targetableHexes.Contains(manager)) {
@@ -33,11 +42,7 @@ public class HealActionController : CharacterActionControllerWithMetadata<HealAc
             return;
         }
 
-        foreach(HexSpaceManager targetHex in targetableHexes) {
-            targetHex.MaterialController.ResetColor();
-        }
-
-        HexMasterManager.Instance.OnHexClicked -= CheckHeal;
+        Cancel();
 
         manager.Occupant.HealthController.Heal(Meta.HealAmount);
         ActionEnded?.Invoke();

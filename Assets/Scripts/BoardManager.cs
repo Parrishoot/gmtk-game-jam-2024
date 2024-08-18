@@ -68,6 +68,15 @@ public class BoardManager : MonoBehaviour
             .First();
     }
 
+    public bool HasOccupants() {
+        return LayoutController
+        .Board
+        .Flatten()
+        .Any(x => x != null && x.IsOccupied());
+    }
+
+    
+
     public void ZoomIn()
     {
         EventManager.ZoomIn?.Invoke();

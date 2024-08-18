@@ -11,9 +11,9 @@ public class AttackActionMetadata : ActionMetadata
     [field:SerializeReference]
     public int Range { get; private set; } = 1;
 
-    public override CharacterActionController GetController(MoveableOccupantManager occupantManager)
+    public override CharacterActionController GetController(CharacterManager characterManager)
     {
-        return new AttackActionController(occupantManager, this);
+        return new AttackActionController(characterManager, this);
     }
 
     public override string GetDescription()

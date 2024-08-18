@@ -7,14 +7,14 @@ public class DiveActionController : CharacterActionControllerWithMetadata<DiveAc
 
     private List<HexSpaceManager> targetableHexes = new List<HexSpaceManager>();
 
-    public DiveActionController(MoveableOccupantManager moveableOccupantManager, DiveActionMetadata meta) : base(moveableOccupantManager, meta)
+    public DiveActionController(CharacterManager moveableOccupantManager, DiveActionMetadata meta) : base(moveableOccupantManager, meta)
     {
     }
 
     public override void Begin()
     {
-        List<HexSpaceManager> hexesInDistance = occupantManager.Hex.GetHexesInRange(Meta.Range);
-        hexesInDistance.Add(occupantManager.Hex);
+        List<HexSpaceManager> hexesInDistance = characterManager.Hex.GetHexesInRange(Meta.Range);
+        hexesInDistance.Add(characterManager.Hex);
 
         foreach(HexSpaceManager targetHex in hexesInDistance) {
             if(!targetHex.IsOccupied() && targetHex.ChildBoardManager != null) {
@@ -26,6 +26,15 @@ public class DiveActionController : CharacterActionControllerWithMetadata<DiveAc
         HexMasterManager.Instance.OnHexClicked += CheckDive;
     }
 
+    public override void Cancel()
+    {
+        foreach(HexSpaceManager targetHex in targetableHexes) {
+            targetHex.MaterialController.ResetColor();
+        }
+
+        HexMasterManager.Instance.OnHexClicked -= CheckDive;
+    }
+
     private void CheckDive(HexSpaceManager manager)
     {
         //TODO: REVIEW THIS
@@ -34,17 +43,13 @@ public class DiveActionController : CharacterActionControllerWithMetadata<DiveAc
             return;
         }
 
-        foreach(HexSpaceManager targetHex in targetableHexes) {
-            targetHex.MaterialController.ResetColor();
-        }
-
-        HexMasterManager.Instance.OnHexClicked -= CheckDive;
+        Cancel();
 
         BoardManager childBoardManager = manager.ChildBoardManager;
         HexSpaceManager childCenter = childBoardManager.GetClosestOpenHexTo(childBoardManager.LayoutController.GetCenter().Coordinate);
 
-        childCenter.Occupy(occupantManager);
-        occupantManager.MaterialController.Hide();       
+        childCenter.Occupy(characterManager);
+        characterManager.MaterialController.Hide();       
         
         ActionEnded?.Invoke();
     }

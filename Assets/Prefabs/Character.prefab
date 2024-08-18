@@ -13,6 +13,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character
       objectReference: {fileID: 0}
+    - target: {fileID: 8047322862588848353, guid: 91b6a3610cafcdb49a88913b2a8b10fd,
+        type: 3}
+      propertyPath: <ActionPool>k__BackingField
+      value: 
+      objectReference: {fileID: 9038998455683178547}
     - target: {fileID: 8431416378972870443, guid: 91b6a3610cafcdb49a88913b2a8b10fd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -90,8 +95,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11809ad7bfe8136439f1a9b814b0f59e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveableOccupantManager: {fileID: 7669012949662295729}
-  actions:
+  characterManager: {fileID: 7669012949662295729}
+  Actions:
+  - {fileID: 11400000, guid: da7c9671affb9074297399dc8c10bc58, type: 2}
+  - {fileID: 11400000, guid: 0966367dc8513ba44b8981e2c7c7bb97, type: 2}
+  - {fileID: 11400000, guid: d6c04b6a7d339a64eb71f106ad3ada96, type: 2}
   - {fileID: 11400000, guid: 6351ee2f71986ec4680ff5ab67c76865, type: 2}
 --- !u!114 &7669012949662295729 stripped
 MonoBehaviour:
