@@ -28,7 +28,7 @@ public class BoardZoomManager : MonoBehaviour
     }
 
     public void ZoomOut() {
-        transform.DOScale(Vector3.one / 6, TransitionConfig.ZOOM_TIME).SetEase(TransitionConfig.ZOOM_TWEEN_TYPE);
+        transform.DOScale(Vector3.one / 6, TransitionConfig.ZOOM_TIME).SetEase(TransitionConfig.ZOOM_TWEEN_TYPE).OnComplete(() => transform.localScale = Vector3.one);
         boardManager.ForEachHex((hexSpaceManager) => {
             hexSpaceManager.FadeOut();
         });
