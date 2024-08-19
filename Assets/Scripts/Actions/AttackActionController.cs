@@ -23,6 +23,12 @@ public class AttackActionController : TargetableActionController<AttackActionMet
 
     protected override void PerformAction(HexSpaceManager selectedHex)
     {
+        characterManager.AnimationController.Attack(selectedHex.OccupantPivot.position, () => EndAction(selectedHex));
+    }
+
+    private void EndAction(HexSpaceManager selectedHex)
+    {
         selectedHex.Occupant.HealthController.Damage(Meta.Damage + characterManager.GetAdjacencyBonuses());
+        ActionEnded?.Invoke();
     }
 }

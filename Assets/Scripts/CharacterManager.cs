@@ -10,6 +10,9 @@ public class CharacterManager : HexOccupantManager
     [field:SerializeReference]
     public TargetSelector TargetSelector{ get; private set; }
 
+    [field:SerializeReference]
+    public CharacterAnimationController AnimationController { get; private set; }
+
     public MovementController MovementController { get; set; }
 
     public void Start() {

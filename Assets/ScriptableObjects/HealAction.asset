@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: HealAction
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Heal
-  <Cost>k__BackingField: 2
+  <Cost>k__BackingField: 3
   <Range>k__BackingField: 1
   <HealAmount>k__BackingField: 2

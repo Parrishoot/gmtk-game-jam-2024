@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Dive
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Dive
-  <Cost>k__BackingField: 2
+  <Cost>k__BackingField: 6
   <Range>k__BackingField: 1

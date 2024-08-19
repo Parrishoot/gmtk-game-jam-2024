@@ -15,6 +15,10 @@ public class DiveActionController : TargetableActionController<DiveActionMetadat
 
     protected override void PerformAction(HexSpaceManager selectedHex)
     {
+        characterManager.AnimationController.Dive(selectedHex.OccupantPivot.position, () => End(selectedHex));
+    }
+
+    private void End(HexSpaceManager selectedHex) {
         BoardManager childBoardManager = selectedHex.ChildBoardManager;
         HexSpaceManager childCenter = childBoardManager.GetClosestOpenHexTo(childBoardManager.LayoutController.GetCenter().Coordinate);
 
@@ -22,7 +26,9 @@ public class DiveActionController : TargetableActionController<DiveActionMetadat
         childCenter.Occupy(characterManager);
         characterManager.FadeOut(TransitionConfig.ZOOM_TIME);
 
-        childBoardManager.boardControlManager.UpdateControlType();   
+        childBoardManager.boardControlManager.UpdateControlType();
+
+        ActionEnded?.Invoke();
     }
 
     protected override Color TargetColor()

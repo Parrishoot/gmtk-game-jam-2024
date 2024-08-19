@@ -14,16 +14,23 @@ public class RiseActionController : CharacterActionControllerWithMetadata<RiseAc
     {
 
         if(targetHex == null) {
+            ActionEnded?.Invoke();
             return;
         }
 
+        characterManager.AnimationController.Rise(End);
+    }
+
+    private void End() {
         HexSpaceManager updatedHex = characterManager.Hex.ParentBoardManager.ContainingHex;
 
         characterManager.transform.position = targetHex.OccupantPivot.position;
         characterManager.transform.localScale = Vector3.one * 5;
         targetHex.Occupy(characterManager);
 
-        updatedHex.ChildBoardManager.boardControlManager.UpdateControlType();   
+        updatedHex.ChildBoardManager.boardControlManager.UpdateControlType();
+
+        ActionEnded?.Invoke();
     }
 
     public override void Cancel()

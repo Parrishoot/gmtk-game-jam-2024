@@ -39,8 +39,6 @@ public abstract class TargetableActionControllerBase : CharacterActionController
         ResetTargets();
 
         PerformAction(manager);
-
-        ActionEnded?.Invoke();
     }
 
     public void ResetTargets() {

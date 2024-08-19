@@ -21,6 +21,9 @@ public class MoveCardController : MonoBehaviour, ISelectHandler, IPointerEnterHa
     [SerializeField]
     private Selectable selectable;
 
+    [SerializeField]
+    private Image background;
+
     private CharacterManager characterManager;
 
     private ActionMetadata actionMetadata;
@@ -30,6 +33,20 @@ public class MoveCardController : MonoBehaviour, ISelectHandler, IPointerEnterHa
         titleText.text = actionMetadata.Name;
         descriptionText.text = actionMetadata.GetDescription(characterManager.GetAdjacencyBonuses());
         costText.text = actionMetadata.Cost.ToString();
+
+        if(TeamMasterManager.Instance.Managers[characterManager.CharacterType].ActionPoints < actionMetadata.Cost) {
+            selectable.interactable = false;
+            
+            Color color = Color.white;
+            color.a = .6f;
+
+            titleText.SetAlpha(.6f);
+            descriptionText.SetAlpha(.6f);
+            costText.SetAlpha(.6f);
+            background.color = color;
+
+            transform.localScale = Vector3.one * .9f;
+        }
 
         this.characterManager = characterManager;
         this.actionMetadata = actionMetadata;
@@ -54,6 +71,6 @@ public class MoveCardController : MonoBehaviour, ISelectHandler, IPointerEnterHa
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        transform.DOScale(Vector3.one, .1f).SetEase(Ease.InOutSine);
+        transform.DOScale(Vector3.one * (selectable.interactable ? 1f : .9f), .1f).SetEase(Ease.InOutSine);
     }
 }
