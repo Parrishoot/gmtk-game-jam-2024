@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 955aaab99f764b444834ceb625337d3a, type: 3}
   m_Name: Dive
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: Dive!
+  <Name>k__BackingField: Dive
+  <Cost>k__BackingField: 2
   <Range>k__BackingField: 1

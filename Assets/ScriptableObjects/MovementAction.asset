@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e805b7a2608e7104887096061117af5e, type: 3}
   m_Name: MovementAction
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: Basic Movement
+  <Name>k__BackingField: Move
+  <Cost>k__BackingField: 2
   <Range>k__BackingField: 2
