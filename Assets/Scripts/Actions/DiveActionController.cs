@@ -15,18 +15,24 @@ public class DiveActionController : TargetableActionController<DiveActionMetadat
 
     protected override void PerformAction(HexSpaceManager selectedHex)
     {
+        HexMasterManager.Instance.ZoomOnClick = false;
         characterManager.AnimationController.Dive(selectedHex.OccupantPivot.position, () => End(selectedHex));
     }
 
     private void End(HexSpaceManager selectedHex) {
+
+        characterManager.Hide();
+        characterManager.transform.localScale = Vector3.one;
+
         BoardManager childBoardManager = selectedHex.ChildBoardManager;
         HexSpaceManager childCenter = childBoardManager.GetClosestOpenHexTo(childBoardManager.LayoutController.GetCenter().Coordinate);
 
         characterManager.transform.position = childCenter.OccupantPivot.position;
         childCenter.Occupy(characterManager);
-        characterManager.FadeOut(TransitionConfig.ZOOM_TIME);
 
         childBoardManager.boardControlManager.UpdateControlType();
+
+        HexMasterManager.Instance.ZoomOnClick = true;
 
         ActionEnded?.Invoke();
     }

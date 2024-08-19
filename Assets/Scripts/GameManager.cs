@@ -100,8 +100,6 @@ public class GameManager : Singleton<GameManager>
             return;
         }
 
-        
-
         StartTurn();
     }
 
@@ -117,10 +115,11 @@ public class GameManager : Singleton<GameManager>
     }
 
     private void StartTurn() {
-        turnControllers[currentControllingPlayer].StartTurn();
-        TurnStarted?.Invoke(currentControllingPlayer);
 
         HexMasterManager.Instance.ZoomFinished -= StartTurn;
+
+        turnControllers[currentControllingPlayer].StartTurn();
+        TurnStarted?.Invoke(currentControllingPlayer);
     }
 
     void Update() {

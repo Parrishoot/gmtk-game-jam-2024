@@ -11,6 +11,8 @@ public class HexMasterManager : Singleton<HexMasterManager>
 
     public HexSpaceManager ActiveHex { get; set ; }
 
+    public bool ZoomOnClick { get; set; } = true;
+
     // FOR DEBUGGING
     public HexSpaceManager HoverHex { get; set ; }
 
@@ -29,6 +31,5 @@ public class HexMasterManager : Singleton<HexMasterManager>
 
     public void BroadcastZoomFinished() {
         ZoomFinished?.Invoke();
-        ZoomFinished = null;
     }
 }

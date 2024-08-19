@@ -39,7 +39,7 @@ public class HexSelectable : MonoBehaviour
         hexSpaceManager.EventManager.Clicked?.Invoke();
 
         // TODO: TURN THIS BACK ON
-        if(isSelectable && hexSpaceManager.ChildBoardManager != null && hexSpaceManager.ChildBoardManager.HasOccupants()) {   
+        if(isSelectable && hexSpaceManager.ChildBoardManager != null && hexSpaceManager.ChildBoardManager.HasOccupants() && HexMasterManager.Instance.ZoomOnClick) {   
             hexSpaceManager.ZoomIn();
         }
     }

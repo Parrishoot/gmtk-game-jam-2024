@@ -28,6 +28,11 @@ public class HexOccupantManager: MonoBehaviour
         healthUIController.Text.DOFade(0f, fadeTime).SetEase(easeType);
     }
 
+    public void Hide() {
+        MaterialController.Hide();
+        healthUIController.Text.SetAlpha(0f);
+    }
+
     public void FadeIn(float fadeTime, Ease easeType = Ease.InOutCubic) {
         MaterialController.FadeIn(fadeTime, easeType);
         healthUIController.Text.DOFade(1f, fadeTime).SetEase(easeType);
