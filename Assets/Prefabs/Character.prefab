@@ -117,7 +117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 4614676158307046089}
   healthController: {fileID: 2316183358334648437}
-  text: {fileID: 9123337250164558045}
+  <Text>k__BackingField: {fileID: 9123337250164558045}
 --- !u!1 &8340530787065738916
 GameObject:
   m_ObjectHideFlags: 0
@@ -265,6 +265,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character
       objectReference: {fileID: 0}
+    - target: {fileID: 8047322862588848353, guid: 91b6a3610cafcdb49a88913b2a8b10fd,
+        type: 3}
+      propertyPath: healthUIController
+      value: 
+      objectReference: {fileID: 1186634627133110513}
     - target: {fileID: 8047322862588848353, guid: 91b6a3610cafcdb49a88913b2a8b10fd,
         type: 3}
       propertyPath: <ActionPool>k__BackingField

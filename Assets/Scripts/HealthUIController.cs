@@ -11,8 +11,8 @@ public class HealthUIController : MonoBehaviour
     [SerializeField]
     private HealthController healthController;
 
-    [SerializeField]
-    private TMP_Text text;
+    [field:SerializeReference]
+    public TMP_Text Text { get; private set; }
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +23,6 @@ public class HealthUIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = healthController.CurrentHealth.ToString();
+        Text.text = healthController.CurrentHealth.ToString();
     }
 }

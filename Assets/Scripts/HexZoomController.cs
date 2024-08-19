@@ -78,7 +78,7 @@ public class HexZoomController : MonoBehaviour
         hexSpaceManager.MaterialController.FadeIn(TransitionConfig.ZOOM_TIME, TransitionConfig.ZOOM_TWEEN_TYPE);
 
         if(hexSpaceManager.IsOccupied()) {
-            hexSpaceManager.Occupant.MaterialController.FadeIn(TransitionConfig.ZOOM_TIME, TransitionConfig.ZOOM_TWEEN_TYPE);
+            hexSpaceManager.Occupant.FadeIn(TransitionConfig.ZOOM_TIME, TransitionConfig.ZOOM_TWEEN_TYPE);
         }
     }
 
@@ -86,7 +86,7 @@ public class HexZoomController : MonoBehaviour
         hexSpaceManager.MaterialController.FadeOut(TransitionConfig.ZOOM_TIME, TransitionConfig.ZOOM_TWEEN_TYPE);
 
         if(hexSpaceManager.IsOccupied()) {
-            hexSpaceManager.Occupant.MaterialController.FadeOut(TransitionConfig.ZOOM_TIME, TransitionConfig.ZOOM_TWEEN_TYPE);
+            hexSpaceManager.Occupant.FadeOut(TransitionConfig.ZOOM_TIME, TransitionConfig.ZOOM_TWEEN_TYPE);
         }
     }
 

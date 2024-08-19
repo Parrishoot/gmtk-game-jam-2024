@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class HexOccupantManager: MonoBehaviour
@@ -13,9 +14,22 @@ public class HexOccupantManager: MonoBehaviour
     [field:SerializeField]
     public MaterialController MaterialController { get; private set; }
 
+    [field:SerializeField]
+    public HealthUIController healthUIController;
+
     public HexSpaceManager Hex { get; set; }
 
     public bool IsDamageable() {
         return HealthController != null;
+    }
+
+    public void FadeOut(float fadeTime, Ease easeType = Ease.InOutCubic) {
+        MaterialController.FadeOut(fadeTime, easeType);
+        healthUIController.Text.DOFade(0f, fadeTime).SetEase(easeType);
+    }
+
+    public void FadeIn(float fadeTime, Ease easeType = Ease.InOutCubic) {
+        MaterialController.FadeIn(fadeTime, easeType);
+        healthUIController.Text.DOFade(1f, fadeTime).SetEase(easeType);
     }
 }
