@@ -15,7 +15,7 @@ public class EnemyActionSelectState : GenericState<EnemyTurnManager>
 
     public override void OnEnd()
     {
-        HexMasterManager.Instance.ZoomFinished -= BeginAction;
+        
     }
 
     public override void OnStart()
@@ -38,6 +38,8 @@ public class EnemyActionSelectState : GenericState<EnemyTurnManager>
         }
 
         selectedAction = validActions.GetRandomSelection();
+
+        Debug.Log("Enemy performing: " + selectedAction.GetType().ToString());
 
         selectedAction.ActionEnded += End;
 

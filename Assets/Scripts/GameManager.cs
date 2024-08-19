@@ -28,12 +28,16 @@ public class GameManager : Singleton<GameManager>
         new Vector2Int(1, 0),
         new Vector2Int(2, 0),
         new Vector2Int(3, 0),
+        new Vector2Int(0, 1),
+        new Vector2Int(3, 1),
     };
 
     private Vector2Int[] PLAYER_STARTING_SPACES = new Vector2Int[]{ 
         new Vector2Int(1, 4),
         new Vector2Int(2, 4),
         new Vector2Int(3, 4),
+        new Vector2Int(0, 3),
+        new Vector2Int(3, 3),
     };
 
     private Dictionary<CharacterType, TurnController> turnControllers = new Dictionary<CharacterType, TurnController>();
