@@ -27,6 +27,8 @@ public class MovementActionController : TargetableActionController<MovementActio
     {
         characterManager.MovementController.OnMovementFinished += EndAction;
         characterManager.MovementController.Move(availablePaths[selectedHex]);
+
+        TeamMasterManager.Instance.Managers[characterManager.CharacterType].SpendActionPoints(Meta.Cost);
     }
 
     public override void ProcessSelection(HexSpaceManager manager)

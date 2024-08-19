@@ -33,4 +33,15 @@ where T: TargetableActionMetadata
 
         characterManager.TargetSelector.BeginSelection(this);
     }
+
+    public override void ProcessSelection(HexSpaceManager manager)
+    {
+        TeamMasterManager.Instance.Managers[characterManager.CharacterType].SpendActionPoints(Meta.Cost);
+        base.ProcessSelection(manager);
+    }
+
+    public override bool IsValid()
+    {
+        return base.IsValid() && TeamMasterManager.Instance.Managers[characterManager.CharacterType].ActionPoints >= Meta.Cost;
+    }
 }

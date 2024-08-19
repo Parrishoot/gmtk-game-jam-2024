@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class EndTurnButtonController : MonoBehaviour
+public class APUIController : MonoBehaviour
 {
-    public void Start() {
+    [SerializeField]
+    private TMP_Text text;
+
+    void Start() {
         GameManager.Instance.TurnStarted += (characterType) => {
             if (characterType == CharacterType.PLAYER) {
                 gameObject.SetActive(true);
@@ -18,7 +22,9 @@ public class EndTurnButtonController : MonoBehaviour
         };
     }
 
-    public void ButtonClicked() {
-        GameManager.Instance.EndCurrentTurn();
+    // Update is called once per frame
+    void Update()
+    {
+        text.text = "AP: " + TeamMasterManager.Instance.Managers[CharacterType.PLAYER].ActionPoints.ToString();
     }
 }

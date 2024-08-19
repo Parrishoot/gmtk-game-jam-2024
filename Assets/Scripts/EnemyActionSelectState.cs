@@ -6,18 +6,21 @@ using UnityEngine.TextCore.Text;
 
 public class EnemyActionSelectState : GenericState<EnemyTurnManager>
 {
+
+    private CharacterActionController selectedAction;
+
     public EnemyActionSelectState(EnemyTurnManager stateMachine) : base(stateMachine)
     {
     }
 
     public override void OnEnd()
     {
-        
+        HexMasterManager.Instance.ZoomFinished -= BeginAction;
     }
 
     public override void OnStart()
     {
-        List<CharacterManager> enemies = TeamManager.Instance.Roster[CharacterType.ENEMY];
+        List<CharacterManager> enemies = TeamMasterManager.Instance.Managers[CharacterType.ENEMY].Roster;
 
         // TODO: UPDATE THIS LOGIC
         CharacterManager selectedEnemy = enemies.GetRandomSelection();
@@ -34,10 +37,24 @@ public class EnemyActionSelectState : GenericState<EnemyTurnManager>
             return;
         }
 
-        CharacterActionController selectedAction = validActions.GetRandomSelection();
+        selectedAction = validActions.GetRandomSelection();
 
         selectedAction.ActionEnded += End;
 
+        if(selectedEnemy.Hex.ParentBoardManager.ContainingHex != null &&
+            HexMasterManager.Instance.ActiveHex != selectedEnemy.Hex.ParentBoardManager.ContainingHex) {
+            
+            HexMasterManager.Instance.ZoomFinished += BeginAction;
+            selectedEnemy.Hex.ParentBoardManager.ContainingHex.ZoomIn();
+        }
+        else {
+            BeginAction();
+        }
+
+
+    }
+
+    private void BeginAction() {
         selectedAction.Begin();
     }
 

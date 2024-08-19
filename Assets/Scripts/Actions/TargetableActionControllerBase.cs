@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class TargetableActionControllerBase : CharacterActionController
@@ -38,6 +39,7 @@ public abstract class TargetableActionControllerBase : CharacterActionController
         ResetTargets();
 
         PerformAction(manager);
+
         ActionEnded?.Invoke();
     }
 

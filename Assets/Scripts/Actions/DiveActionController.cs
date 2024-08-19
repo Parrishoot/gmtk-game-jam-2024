@@ -20,7 +20,7 @@ public class DiveActionController : TargetableActionController<DiveActionMetadat
 
         characterManager.transform.position = childCenter.OccupantPivot.position;
         childCenter.Occupy(characterManager);
-        characterManager.MaterialController.Hide();   
+        characterManager.FadeOut(TransitionConfig.ZOOM_TIME);   
     }
 
     protected override Color TargetColor()

@@ -34,7 +34,7 @@ public class PlayerActionSelectState : GenericState<PlayerTurnManager>
             return;
         }
 
-        foreach(CharacterManager characterManager in TeamManager.Instance.Roster[CharacterType.PLAYER]) {
+        foreach(CharacterManager characterManager in TeamMasterManager.Instance.Managers[CharacterType.PLAYER].Roster) {
             if(manager.Occupant.Equals(characterManager)) {
                 MovePanelManager.Instance.SetCards(characterManager);
                 currentCharacter = characterManager;

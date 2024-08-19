@@ -22,6 +22,8 @@ public class BoardManager : MonoBehaviour
 
     public bool BoardEnabled { get; private set; } = true;
 
+    public HexSpaceManager ContainingHex { get; set; }
+
     // Update is called once per frame
     public void CreateBoard()
     {

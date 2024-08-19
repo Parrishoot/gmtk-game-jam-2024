@@ -25,6 +25,10 @@ public class HexSpaceManager : MonoBehaviour
         this.ParentBoardManager = parentBoardController;
         ChildBoardManager = childBoardController;
 
+        if(childBoardController != null) {
+            childBoardController.ContainingHex = this;
+        }
+
         transform.localPosition = ParentBoardManager.LayoutController.GetPositionForCoordinate(coordinate);
         Coordinate = coordinate;
 

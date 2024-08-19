@@ -77,23 +77,30 @@ public class GameManager : Singleton<GameManager>
     }
 
     public void Start() {
-        StartTurn(CharacterType.PLAYER);
+        currentControllingPlayer = CharacterType.PLAYER;
+        StartTurn();
     }
 
     public void EndCurrentTurn() {
         
         turnControllers[currentControllingPlayer].EndTurn();
         TurnEnded?.Invoke(currentControllingPlayer);
-
+        
         currentControllingPlayer = currentControllingPlayer == CharacterType.PLAYER ? CharacterType.ENEMY : CharacterType.PLAYER;
 
-        StartTurn(currentControllingPlayer);
+        if(HexMasterManager.Instance.ActiveHex != null) {
+            HexMasterManager.Instance.ZoomFinished += StartTurn;
+            HexMasterManager.Instance.ZoomOut();
+            return;
+        }
+
+        StartTurn();
     }
 
-    private void StartTurn(CharacterType characterType) {
-        currentControllingPlayer = characterType;
-        
+    private void StartTurn() {
         turnControllers[currentControllingPlayer].StartTurn();
         TurnStarted?.Invoke(currentControllingPlayer);
+
+        HexMasterManager.Instance.ZoomFinished -= StartTurn;
     }
 }

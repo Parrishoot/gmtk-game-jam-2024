@@ -37,7 +37,7 @@ public class HexZoomController : MonoBehaviour
         CameraPivotController.Instance.SetHexHighlight(hexSpaceManager);
 
         // Scale the parent and slide it back at the same rate
-        transform.parent.DOScale(Vector3.one * ZOOM_AMOUNT, TransitionConfig.ZOOM_TIME).SetEase(TransitionConfig.ZOOM_TWEEN_TYPE);
+        transform.parent.DOScale(Vector3.one * ZOOM_AMOUNT, TransitionConfig.ZOOM_TIME).SetEase(TransitionConfig.ZOOM_TWEEN_TYPE).OnComplete(HexMasterManager.Instance.BroadcastZoomFinished);
 
         // For some reason couldn't get this math to work - this close enough for the jam :(
         transform.parent.DOMove(transform.parent.position - (hexSpaceManager.GetOffset() * (ZOOM_AMOUNT * .8f)), TransitionConfig.ZOOM_TIME).SetEase(TransitionConfig.ZOOM_TWEEN_TYPE);
@@ -48,7 +48,6 @@ public class HexZoomController : MonoBehaviour
         
         hexSpaceManager.ChildBoardManager.EnableBoard();
         hexSpaceManager.ParentBoardManager.DisableBoard();
-        
     }
 
     public void ZoomOut() {
@@ -67,7 +66,7 @@ public class HexZoomController : MonoBehaviour
         
         hexSpaceManager.FadeIn();
 
-        transform.DOScale(Vector3.one, TransitionConfig.ZOOM_TIME).SetEase(TransitionConfig.ZOOM_TWEEN_TYPE);
+        transform.DOScale(Vector3.one, TransitionConfig.ZOOM_TIME).SetEase(TransitionConfig.ZOOM_TWEEN_TYPE).OnComplete(HexMasterManager.Instance.BroadcastZoomFinished);
         hexSpaceManager.ChildBoardManager.ZoomOut();
 
         hexSpaceManager.ParentBoardManager.EnableBoard();

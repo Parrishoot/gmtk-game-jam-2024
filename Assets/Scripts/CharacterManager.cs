@@ -13,6 +13,6 @@ public class CharacterManager : HexOccupantManager
     public MovementController MovementController { get; set; }
 
     public void Start() {
-        TeamManager.Instance.Roster[CharacterType].Add(this);
+        TeamMasterManager.Instance.Managers[CharacterType].Roster.Add(this);
     }
 }

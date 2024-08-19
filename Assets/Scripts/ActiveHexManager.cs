@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class HexMasterManager : Singleton<HexMasterManager>
 {
+    public Action ZoomFinished;
+
     public Action<HexSpaceManager> OnHexClicked { get; set; }
 
     public HexSpaceManager ActiveHex { get; set ; }
@@ -16,8 +18,17 @@ public class HexMasterManager : Singleton<HexMasterManager>
     void Update()
     {
         if(Input.GetMouseButtonDown(1) && ActiveHex != null) {
-            ActiveHex?.ZoomOut();
-            ActiveHex = null;
+            ZoomOut();
         }
+    }
+
+    public void ZoomOut() {
+        ActiveHex?.ZoomOut();
+        ActiveHex = null;
+    }
+
+    public void BroadcastZoomFinished() {
+        ZoomFinished?.Invoke();
+        ZoomFinished = null;
     }
 }
