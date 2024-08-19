@@ -11,7 +11,7 @@ public class MovementActionMetadata : TargetableActionMetadata
         return new MovementActionController(moveableOccupantManager, this);
     }
 
-    public override string GetDescription()
+    public override string GetDescription(int adjacencyBonuses)
     {
         return "Move " + Range.ToString() + " Spaces";
     }

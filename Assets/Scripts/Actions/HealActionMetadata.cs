@@ -13,8 +13,8 @@ public class HealActionMetadata : TargetableActionMetadata
         return new HealActionController(occupantManager, this);
     }
 
-    public override string GetDescription()
+    public override string GetDescription(int adjacencyBonuses)
     {
-        return "Heal for " + HealAmount.ToString();
+        return "Heal for " + (HealAmount + adjacencyBonuses).ToString();
     }
 }

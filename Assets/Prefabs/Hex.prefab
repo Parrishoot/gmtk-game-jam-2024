@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 8067440783394146834}
   - component: {fileID: 6992277964957178020}
   - component: {fileID: 1154213266099493257}
+  - component: {fileID: 1668700571973482487}
   m_Layer: 0
   m_Name: Hex
   m_TagString: Untagged
@@ -111,7 +112,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hexSpaceManager: {fileID: 8268788459877509288}
   hexSelectable: {fileID: 963358656707510464}
-  hexMaterialController: {fileID: 1154213266099493257}
 --- !u!114 &8067440783394146834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,6 +153,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 6091395924249815792}
+--- !u!114 &1668700571973482487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6762952599826819983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd9feaf0f86e910428874ecfddd975f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hexSpaceManager: {fileID: 8268788459877509288}
 --- !u!1 &8700872866264103154
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,4 +15,24 @@ public class CharacterManager : HexOccupantManager
     public void Start() {
         TeamMasterManager.Instance.Managers[CharacterType].Roster.Add(this);
     }
+
+    
+    public int GetAdjacencyBonuses() {
+        List<HexSpaceManager> hexSpaceManagers = Hex.GetAdjacentHexes();
+
+        int adjacencyBonuses = 0;
+
+        foreach(HexSpaceManager neighbor in hexSpaceManagers) {
+
+            if(neighbor.ChildBoardManager == null) {
+                continue;
+            }
+
+            if(neighbor.ChildBoardManager.boardControlManager.ControlType.GetControlCharacterType() == CharacterType) {
+                adjacencyBonuses++;
+            }
+        }
+
+        return adjacencyBonuses;
+    }
 }

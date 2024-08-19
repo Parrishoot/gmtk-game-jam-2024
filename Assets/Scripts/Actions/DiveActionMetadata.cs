@@ -11,7 +11,7 @@ public class DiveActionMetadata : TargetableActionMetadata
         return new DiveActionController(occupantManager, this);
     }
 
-    public override string GetDescription()
+    public override string GetDescription(int adjacencyBonuses)
     {
         return "Dive baby, dive!";
     }

@@ -45,7 +45,7 @@ public abstract class TargetableActionControllerBase : CharacterActionController
 
     public void ResetTargets() {
         foreach(HexSpaceManager targetHex in TargetableHexes) {
-            targetHex.MaterialController.ResetColor();
+            targetHex.MaterialController.ResetHexColor();
         }
         characterManager.TargetSelector.EndSelection(this);
     }

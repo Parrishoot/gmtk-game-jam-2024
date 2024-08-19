@@ -13,5 +13,5 @@ public abstract class ActionMetadata : ScriptableObject
 
     public abstract CharacterActionController GetController(CharacterManager occupantManager);
 
-    public abstract String GetDescription();
+    public abstract String GetDescription(int adjacencyBonuses);
 }

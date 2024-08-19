@@ -23,6 +23,6 @@ public class AttackActionController : TargetableActionController<AttackActionMet
 
     protected override void PerformAction(HexSpaceManager selectedHex)
     {
-        selectedHex.Occupant.HealthController.Damage(Meta.Damage);
+        selectedHex.Occupant.HealthController.Damage(Meta.Damage + characterManager.GetAdjacencyBonuses());
     }
 }

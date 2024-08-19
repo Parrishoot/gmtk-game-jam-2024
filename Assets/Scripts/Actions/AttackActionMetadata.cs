@@ -13,8 +13,8 @@ public class AttackActionMetadata : TargetableActionMetadata
         return new AttackActionController(characterManager, this);
     }
 
-    public override string GetDescription()
+    public override string GetDescription(int adjacencyBonuses)
     {
-        return "Attack an enemy for " + Damage + " damage";
+        return "Attack an enemy for " + (Damage + adjacencyBonuses) + " damage";
     }
 }

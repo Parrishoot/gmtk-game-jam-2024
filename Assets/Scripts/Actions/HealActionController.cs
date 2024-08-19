@@ -24,6 +24,6 @@ public class HealActionController : TargetableActionController<HealActionMetadat
 
     protected override void PerformAction(HexSpaceManager selectedHex)
     {
-        selectedHex.Occupant.HealthController.Heal(Meta.HealAmount);
+        selectedHex.Occupant.HealthController.Heal(Meta.HealAmount + characterManager.GetAdjacencyBonuses());
     }
 }

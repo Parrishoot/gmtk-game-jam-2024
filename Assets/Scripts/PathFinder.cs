@@ -58,7 +58,7 @@ public static class PathFinder
                     continue;
                 }
 
-                if(neighborNode.Hex.IsOccupied()) {
+                if(NotWalkable(startNode, neighborNode)) {
                     closedList.Add(neighborNode);
                     continue;
                 }
@@ -79,6 +79,22 @@ public static class PathFinder
 
         // Inaccessible endpoint
         return null;
+    }
+
+    private static bool NotWalkable(PathNode startNode, PathNode neighborNode)
+    {
+        if(neighborNode.Hex.IsOccupied()) {
+            return true;
+        }
+
+        if(startNode.Hex.Occupant != null &&
+            neighborNode.Hex.ChildBoardManager != null &&
+            neighborNode.Hex.ChildBoardManager.boardControlManager.ControlType.GetControlCharacterType() != startNode.Hex.Occupant.CharacterType &&
+            neighborNode.Hex.ChildBoardManager.boardControlManager.ControlType != ControlType.EMPTY) {
+                return true;
+        }
+
+        return false;
     }
 
     private static List<PathNode> GetNeighbors(PathNode node, PathNode[,] grid) {
