@@ -24,7 +24,7 @@ public class HexControlManager : MonoBehaviour
             ControlType.ENEMY => Color.red,
             ControlType.PLAYER => Color.cyan,
             ControlType.CONTESTED => Color.gray,
-            _ => hexSpaceManager.MaterialController.ResetColor
+            _ => Color.white
         };
 
         hexSpaceManager.MaterialController.SetResetColor(color);

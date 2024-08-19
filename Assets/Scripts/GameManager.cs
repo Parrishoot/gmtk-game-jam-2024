@@ -100,7 +100,20 @@ public class GameManager : Singleton<GameManager>
             return;
         }
 
+        
+
         StartTurn();
+    }
+
+    private void CheckGameOver()
+    {
+        if(TeamMasterManager.Instance.Managers[CharacterType.PLAYER].Roster.Count == 0) {
+            Debug.LogWarning("YOU LOSE!");
+        }
+
+        if(TeamMasterManager.Instance.Managers[CharacterType.ENEMY].Roster.Count == 0) {
+            Debug.LogWarning("YOU WIN!");
+        }
     }
 
     private void StartTurn() {
@@ -108,5 +121,9 @@ public class GameManager : Singleton<GameManager>
         TurnStarted?.Invoke(currentControllingPlayer);
 
         HexMasterManager.Instance.ZoomFinished -= StartTurn;
+    }
+
+    void Update() {
+        CheckGameOver();
     }
 }

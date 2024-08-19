@@ -10,7 +10,7 @@ public class HexSpaceManager : MonoBehaviour
     public Transform OccupantPivot { get; private set; }
 
     [field:SerializeReference]
-    public MaterialController MaterialController {get; private set; }
+    public MaterialController MaterialController { get; private set; }
 
     public Vector2Int Coordinate { get; private set; }
 

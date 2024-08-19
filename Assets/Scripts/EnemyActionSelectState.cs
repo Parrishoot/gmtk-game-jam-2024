@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 public class EnemyActionSelectState : GenericState<EnemyTurnManager>
 {
@@ -15,7 +14,7 @@ public class EnemyActionSelectState : GenericState<EnemyTurnManager>
 
     public override void OnEnd()
     {
-        
+
     }
 
     public override void OnStart()
