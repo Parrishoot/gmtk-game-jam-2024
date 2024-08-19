@@ -12,6 +12,7 @@ public class MaterialController : MonoBehaviour
 
     void Start() {
         startColor = meshRenderer.material.color;
+        startColor.a = 1;
     }
 
     public Color GetColor() {

@@ -22,6 +22,7 @@ public class MoveCardController : MonoBehaviour, ISelectHandler
     private ActionMetadata actionMetadata;
 
     public void Init(CharacterManager characterManager, ActionMetadata actionMetadata) {
+
         titleText.text = actionMetadata.Name;
         descriptionText.text = actionMetadata.GetDescription();
 

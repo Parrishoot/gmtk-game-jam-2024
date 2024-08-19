@@ -14,6 +14,7 @@ public class CharacterActionPoolController : MonoBehaviour
 
     public void StartAction(ActionMetadata actionMetadata) {
         currentAction = actionMetadata.GetController(characterManager);
+        currentAction.Load();
         currentAction.Begin();
     }
 

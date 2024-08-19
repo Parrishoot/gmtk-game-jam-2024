@@ -42,32 +42,7 @@ public abstract class HexBoardLayoutController : MonoBehaviour
 
     public abstract CubedCoordinate GetCubedCoordinates(Vector2Int a);
 
-    public List<HexSpaceManager> GetAdjacentObjects(Vector2Int coordinate) {
-        
-        int hexOffset = coordinate.y  % 2;
-
-        List<Vector2Int> adjacentOffsets = new List<Vector2Int>{
-            new Vector2Int(hexOffset - 1, -1),
-            new Vector2Int(hexOffset, -1),
-            new Vector2Int(-1, 0),
-            new Vector2Int(1, 0),
-            new Vector2Int(hexOffset - 1, 1),
-            new Vector2Int(hexOffset, 1)
-        };
-
-        List<HexSpaceManager> adjacentObjects = new List<HexSpaceManager>();
-
-        foreach(Vector2Int offset in adjacentOffsets) {
-
-            Vector2Int coordinateToCheck = coordinate + offset;
-
-            if(Valid(coordinateToCheck)) {
-                adjacentObjects.Add(Board[coordinateToCheck.x, coordinateToCheck.y]);
-            }
-        }
-
-        return adjacentObjects;
-    }
+    public abstract List<HexSpaceManager> GetAdjacentObjects(Vector2Int coordinate);
 
     public bool Valid(Vector2Int coordinate) {
 

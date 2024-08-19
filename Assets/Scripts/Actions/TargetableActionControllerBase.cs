@@ -16,7 +16,12 @@ public abstract class TargetableActionControllerBase : CharacterActionController
     protected abstract bool IsValidTargetSpace(HexSpaceManager targetHex);
 
     protected abstract void PerformAction(HexSpaceManager selectedHex);
-    
+
+    public override bool IsValid()
+    {
+        return TargetableHexes.Count > 0;
+    }
+
     public override void Cancel()
     {
         ResetTargets();

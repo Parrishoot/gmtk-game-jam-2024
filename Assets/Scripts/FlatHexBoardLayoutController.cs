@@ -21,10 +21,40 @@ public class FlatHexBoardLayoutController : HexBoardLayoutController
         {0, 0, 1, 0, 0}
     };
 
+    public override List<HexSpaceManager> GetAdjacentObjects(Vector2Int coordinate)
+    {
+         
+        
+        int hexOffset = coordinate.x  % 2;
+
+        List<Vector2Int> adjacentOffsets = new List<Vector2Int>{
+            new Vector2Int(0, 1),
+            new Vector2Int(0, -1),
+            new Vector2Int(-1, hexOffset),
+            new Vector2Int(-1, hexOffset - 1),
+            new Vector2Int(1, hexOffset - 1),
+            new Vector2Int(1, hexOffset)
+        };
+
+        List<HexSpaceManager> adjacentObjects = new List<HexSpaceManager>();
+
+        foreach(Vector2Int offset in adjacentOffsets) {
+
+            Vector2Int coordinateToCheck = coordinate + offset;
+
+            if(Valid(coordinateToCheck)) {
+                adjacentObjects.Add(Board[coordinateToCheck.x, coordinateToCheck.y]);
+            }
+        }
+
+        return adjacentObjects;
+    
+    }
+
     public override CubedCoordinate GetCubedCoordinates(Vector2Int a)
     {
         int q = a.x;
-        int r = a.y - (a.x - (a.x % 2)) / 2;
+        int r = a.y - (a.x - (a.x&1)) / 2;
 
         return new CubedCoordinate(q, r, -(q + r));
     }

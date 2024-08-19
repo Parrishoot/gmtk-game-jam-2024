@@ -12,13 +12,21 @@ where T: TargetableActionMetadata
         this.Meta = meta;
     }
 
-    public override void Begin()
+    public override void Load()
     {
         List<HexSpaceManager> hexesInDistance = characterManager.Hex.GetHexesInRange(Meta.Range);
 
         foreach(HexSpaceManager targetHex in hexesInDistance) {
             if(IsValidTargetSpace(targetHex)) {
                 TargetableHexes.Add(targetHex);
+            }
+        }
+    }
+
+    public override void Begin()
+    {
+        foreach(HexSpaceManager targetHex in TargetableHexes) {
+            if(IsValidTargetSpace(targetHex)) {
                 targetHex.MaterialController.SetColor(TargetColor());
             }
         }

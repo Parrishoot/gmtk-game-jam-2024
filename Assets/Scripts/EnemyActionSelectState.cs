@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
@@ -20,7 +21,20 @@ public class EnemyActionSelectState : GenericState<EnemyTurnManager>
 
         // TODO: UPDATE THIS LOGIC
         CharacterManager selectedEnemy = enemies.GetRandomSelection();
-        CharacterActionController selectedAction = selectedEnemy.ActionPool.Actions.GetRandomSelection().GetController(selectedEnemy);
+
+        List<CharacterActionController> actionControllers = selectedEnemy.ActionPool.Actions.Select(x => x.GetController(selectedEnemy)).ToList();
+        foreach(CharacterActionController actionController in actionControllers) {
+            actionController.Load();
+        }
+
+        List<CharacterActionController> validActions = actionControllers.Where(x => x.IsValid()).ToList();
+
+        if(validActions.Count == 0) {
+            End();
+            return;
+        }
+
+        CharacterActionController selectedAction = validActions.GetRandomSelection();
 
         selectedAction.ActionEnded += End;
 

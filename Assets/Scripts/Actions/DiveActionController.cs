@@ -18,6 +18,7 @@ public class DiveActionController : TargetableActionController<DiveActionMetadat
         BoardManager childBoardManager = selectedHex.ChildBoardManager;
         HexSpaceManager childCenter = childBoardManager.GetClosestOpenHexTo(childBoardManager.LayoutController.GetCenter().Coordinate);
 
+        characterManager.transform.position = childCenter.OccupantPivot.position;
         childCenter.Occupy(characterManager);
         characterManager.MaterialController.Hide();   
     }

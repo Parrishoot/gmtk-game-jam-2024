@@ -10,6 +10,6 @@ public static class ListUtils
             return default;
         }
         
-        return l[Random.Range(0, l.Count - 1)];
+        return l[Random.Range(0, l.Count)];
     } 
 }

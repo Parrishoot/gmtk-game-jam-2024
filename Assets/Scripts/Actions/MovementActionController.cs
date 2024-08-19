@@ -14,7 +14,7 @@ public class MovementActionController : TargetableActionController<MovementActio
     {
         List<HexSpaceManager> path = PathFinder.GetPath(characterManager.Hex.ParentBoardManager, characterManager.Hex.Coordinate, targetHex.Coordinate);
 
-        bool validPath = path != null && path.Count <= Meta.Range + 1 && !targetHex.ChildBoardManager.HasOccupants();
+        bool validPath = path != null && path.Count <= Meta.Range + 1 && (targetHex.ChildBoardManager == null || !targetHex.ChildBoardManager.HasOccupants());
 
         if(validPath) {
             availablePaths[targetHex] = path;
