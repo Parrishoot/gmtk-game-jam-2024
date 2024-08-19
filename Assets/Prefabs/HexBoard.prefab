@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 517210345251293633}
   - component: {fileID: 669571470827050879}
   - component: {fileID: 2280549417866160859}
+  - component: {fileID: 4038609095327963268}
   m_Layer: 0
   m_Name: HexBoard
   m_TagString: Untagged
@@ -83,6 +84,7 @@ MonoBehaviour:
   <LayoutController>k__BackingField: {fileID: 0}
   <HexesTransform>k__BackingField: {fileID: 0}
   <ChildBoardsTransform>k__BackingField: {fileID: 0}
+  <boardControlManager>k__BackingField: {fileID: 4038609095327963268}
 --- !u!114 &669571470827050879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,6 +111,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boardManager: {fileID: 517210345251293633}
   hexParentTransform: {fileID: 5481509232781546081}
+--- !u!114 &4038609095327963268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7479497465266021578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 208ad11177d7493448b1caf59bb511dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boardManager: {fileID: 517210345251293633}
+  ControlType: 3
 --- !u!1 &8152180135458365864
 GameObject:
   m_ObjectHideFlags: 0

@@ -74,6 +74,8 @@ public class GameManager : Singleton<GameManager>
             characterManager.transform.position = hex.OccupantPivot.position;
             hex.Occupy(characterManager);
         }
+
+        parentBoardManager.boardControlManager.UpdateControlType();
     }
 
     public void Start() {

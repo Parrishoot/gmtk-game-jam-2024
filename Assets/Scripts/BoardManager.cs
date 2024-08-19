@@ -20,6 +20,9 @@ public class BoardManager : MonoBehaviour
     [field:SerializeField]
     public Transform ChildBoardsTransform { get; private set; }
 
+    [field:SerializeReference]
+    public BoardControlManager boardControlManager { get; private set; }
+
     public bool BoardEnabled { get; private set; } = true;
 
     public HexSpaceManager ContainingHex { get; set; }

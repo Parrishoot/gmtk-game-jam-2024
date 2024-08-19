@@ -8,11 +8,10 @@ public class MaterialController : MonoBehaviour
     [SerializeField]
     private MeshRenderer meshRenderer;
 
-    private Color startColor;
+    private Color resetColor;
 
     void Start() {
-        startColor = meshRenderer.material.color;
-        startColor.a = 1;
+        SetResetColor(meshRenderer.material.color);
     }
 
     public Color GetColor() {
@@ -31,7 +30,7 @@ public class MaterialController : MonoBehaviour
     }
     
     public void ResetColor() {
-        meshRenderer.material.color = startColor;
+        meshRenderer.material.color = resetColor;
     }
 
     public void FadeIn(float fadeTime, Ease easeType=Ease.InOutCubic) {
@@ -44,6 +43,11 @@ public class MaterialController : MonoBehaviour
 
     private void Fade(float fadeTime, float targetValue, Ease easeType=Ease.InOutCubic) {
         meshRenderer.material.DOFade(targetValue, fadeTime).SetEase(easeType);   
+    }
+
+    public void SetResetColor(Color newResetColor) {
+        resetColor = newResetColor;
+        resetColor.a = 1;
     }
 }
 
