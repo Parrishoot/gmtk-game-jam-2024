@@ -86,6 +86,8 @@ MonoBehaviour:
   <EventManager>k__BackingField: {fileID: 2193642687813896866}
   <OccupantPivot>k__BackingField: {fileID: 279111738661178410}
   <MaterialController>k__BackingField: {fileID: 1154213266099493257}
+  selectorPrefab: {fileID: 1785199095922381113, guid: 775e6bc451464a44b92aeab828a70fc1,
+    type: 3}
 --- !u!114 &2193642687813896866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,9 +265,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 0902c869a9d3c654b86ac67411245e07,
         type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 0902c869a9d3c654b86ac67411245e07,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 0106c2c00fbec2344a397d16a53540fb, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 0902c869a9d3c654b86ac67411245e07,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: ac4904f36dbd3864e831578ddd70a29f, type: 2}
     - target: {fileID: -5568371526223589888, guid: 0902c869a9d3c654b86ac67411245e07,
         type: 3}
       propertyPath: m_IsActive

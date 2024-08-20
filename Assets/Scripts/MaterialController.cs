@@ -28,6 +28,10 @@ public class MaterialController : MonoBehaviour
     public void SetColor(Color color) {
         meshRenderer.material.color = color;
     }
+
+    public void SetTargeted(Color color) {
+
+    }
     
     public void ResetHexColor() {
         meshRenderer.material.color = ResetColor;

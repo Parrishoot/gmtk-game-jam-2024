@@ -42,7 +42,7 @@ public class GameManager : Singleton<GameManager>
 
     private Dictionary<CharacterType, TurnController> turnControllers = new Dictionary<CharacterType, TurnController>();
 
-    private CharacterType currentControllingPlayer;
+    public CharacterType CurrentControllingPlayer { get; private set; }
 
     // TODO: Update this
     public bool IsPlayersTurn() {
@@ -83,16 +83,16 @@ public class GameManager : Singleton<GameManager>
     }
 
     public void Start() {
-        currentControllingPlayer = CharacterType.PLAYER;
+        CurrentControllingPlayer = CharacterType.PLAYER;
         StartTurn();
     }
 
     public void EndCurrentTurn() {
         
-        turnControllers[currentControllingPlayer].EndTurn();
-        TurnEnded?.Invoke(currentControllingPlayer);
+        turnControllers[CurrentControllingPlayer].EndTurn();
+        TurnEnded?.Invoke(CurrentControllingPlayer);
         
-        currentControllingPlayer = currentControllingPlayer == CharacterType.PLAYER ? CharacterType.ENEMY : CharacterType.PLAYER;
+        CurrentControllingPlayer = CurrentControllingPlayer == CharacterType.PLAYER ? CharacterType.ENEMY : CharacterType.PLAYER;
 
         if(HexMasterManager.Instance.ActiveHex != null) {
             HexMasterManager.Instance.ZoomFinished += StartTurn;
@@ -118,8 +118,8 @@ public class GameManager : Singleton<GameManager>
 
         HexMasterManager.Instance.ZoomFinished -= StartTurn;
 
-        turnControllers[currentControllingPlayer].StartTurn();
-        TurnStarted?.Invoke(currentControllingPlayer);
+        turnControllers[CurrentControllingPlayer].StartTurn();
+        TurnStarted?.Invoke(CurrentControllingPlayer);
     }
 
     void Update() {

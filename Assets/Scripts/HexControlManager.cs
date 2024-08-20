@@ -21,9 +21,9 @@ public class HexControlManager : MonoBehaviour
     private void ProcessControlTypeChange(ControlType type)
     {
         Color color = type switch {
-            ControlType.ENEMY => Color.red,
-            ControlType.PLAYER => Color.cyan,
-            ControlType.CONTESTED => Color.gray,
+            ControlType.ENEMY => ColorManager.Instance.EnemyHexColor,
+            ControlType.PLAYER => ColorManager.Instance.PlayerHexColor,
+            ControlType.CONTESTED => ColorManager.Instance.ContestedColor,
             _ => Color.white
         };
 

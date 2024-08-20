@@ -12,6 +12,11 @@ public class HexSpaceManager : MonoBehaviour
     [field:SerializeReference]
     public MaterialController MaterialController { get; private set; }
 
+    [field:SerializeField]
+    public GameObject selectorPrefab;
+
+    private SelectorController currentSelector;
+
     public Vector2Int Coordinate { get; private set; }
 
     public BoardManager ParentBoardManager { get; private set; }
@@ -93,5 +98,22 @@ public class HexSpaceManager : MonoBehaviour
     public void ClearOccupant() {   
         Occupant.transform.parent = null;
         Occupant = null;
+    }
+
+    public void SetTargeted(Color color) {
+
+        if(currentSelector != null) {
+            Destroy(currentSelector);
+        }
+
+        currentSelector = Instantiate(selectorPrefab, transform).GetComponent<SelectorController>();
+        currentSelector.SetColor(color);
+    }
+
+    public void ResetTargeted(Color color) {
+
+        if(currentSelector != null) {
+            Destroy(currentSelector);
+        }
     }
 }
