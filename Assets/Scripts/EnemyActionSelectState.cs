@@ -47,17 +47,14 @@ public class EnemyActionSelectState : GenericState<EnemyTurnManager>
         List<CharacterActionController> validActions = actionControllers.Where(x => x.IsValid()).ToList();
 
         if(validActions.Count == 0) {
-            CheckEnd();
+            StateMachine.ChangeState(StateMachine.IdleState);
+            GameManager.Instance.EndCurrentTurn();
             return;
         }
-
-        remainingActions--;
 
         selectedAction = validActions.GetRandomSelection();
 
         Debug.Log("Enemy performing: " + selectedAction.GetType().ToString());
-
-        selectedAction.ActionEnded += CheckEnd;
 
         if(selectedEnemy.Hex.ParentBoardManager.ContainingHex != null &&
             HexMasterManager.Instance.ActiveHex != selectedEnemy.Hex.ParentBoardManager.ContainingHex) {
@@ -72,6 +69,9 @@ public class EnemyActionSelectState : GenericState<EnemyTurnManager>
     }
 
     private void BeginAction() {
+        remainingActions--;
+        Debug.Log("Beginning Action: " + selectedAction.GetType().ToString());
+        selectedAction.ActionEnded += CheckEnd;
         selectedAction.Begin();
     }
 
@@ -89,8 +89,9 @@ public class EnemyActionSelectState : GenericState<EnemyTurnManager>
     private void CheckEnd() {
 
         HexMasterManager.Instance.ZoomFinished -= BeginAction;
+        HexMasterManager.Instance.ZoomFinished -= ChooseAction;
 
-        if(remainingActions == 0) {
+        if(remainingActions <= 0) {
             StateMachine.ChangeState(StateMachine.IdleState);
             GameManager.Instance.EndCurrentTurn();
         }

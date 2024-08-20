@@ -7,8 +7,6 @@ using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
-    public Action OnMovementFinished {get; set; }
-
     [SerializeField]
     private CharacterManager hexOccupantManager;
 
@@ -22,11 +20,11 @@ public class MovementController : MonoBehaviour
         hexOccupantManager.MovementController = this;
     }
 
-    public void Move(HexSpaceManager target) {
-        Move(PathFinder.GetPath(hexOccupantManager.Hex.ParentBoardManager, hexOccupantManager.Hex.Coordinate, target.Coordinate));
+    public void Move(HexSpaceManager target, Action OnMovementFinished = null) {
+        Move(PathFinder.GetPath(hexOccupantManager.Hex.ParentBoardManager, hexOccupantManager.Hex.Coordinate, target.Coordinate), OnMovementFinished);
     }
 
-    public void Move(List<HexSpaceManager> path) {
+    public void Move(List<HexSpaceManager> path, Action OnMovementFinished = null) {
         
         Sequence moveSequence = DOTween.Sequence();
 
@@ -46,8 +44,6 @@ public class MovementController : MonoBehaviour
             OnMovementFinished?.Invoke();
 
             movementAudioSource.Stop();
-
-            OnMovementFinished = null;
         });
 
         moveSequence.Play();

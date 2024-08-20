@@ -25,8 +25,7 @@ public class MovementActionController : TargetableActionController<MovementActio
 
     protected override void PerformAction(HexSpaceManager selectedHex)
     {
-        characterManager.MovementController.OnMovementFinished += EndAction;
-        characterManager.MovementController.Move(availablePaths[selectedHex]);
+        characterManager.MovementController.Move(availablePaths[selectedHex], EndAction);
 
         TeamMasterManager.Instance.Managers[characterManager.CharacterType].SpendActionPoints(Meta.Cost);
     }
