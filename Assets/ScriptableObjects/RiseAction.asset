@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1debdef3ff3e0041a725f7ca5a71173, type: 3}
   m_Name: RiseAction
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: Rise
+  <Name>k__BackingField: Grow
   <Cost>k__BackingField: 6

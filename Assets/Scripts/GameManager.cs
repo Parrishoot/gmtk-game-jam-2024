@@ -2,12 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
     public Action<CharacterType> TurnStarted { get; set; }
 
     public Action<CharacterType> TurnEnded { get; set; }
+
+    public Action<CharacterType> GameOver { get; set; }
 
     [SerializeField]
     private PlayerTurnManager playerTurnController;
@@ -23,6 +26,8 @@ public class GameManager : Singleton<GameManager>
 
     [SerializeField]
     private GameObject enemyPrefab;
+
+    private bool gameOver = false;
 
     private Vector2Int[] ENEMY_STARTING_SPACES = new Vector2Int[]{ 
         new Vector2Int(1, 0),
@@ -105,13 +110,25 @@ public class GameManager : Singleton<GameManager>
 
     private void CheckGameOver()
     {
-        if(TeamMasterManager.Instance.Managers[CharacterType.PLAYER].Roster.Count == 0) {
-            Debug.LogWarning("YOU LOSE!");
+        if(gameOver && Input.GetMouseButtonDown(0)) {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        
+
+        if(!gameOver) {
+            if(TeamMasterManager.Instance.Managers[CharacterType.PLAYER].Roster.Count == 0) {
+                GameOver?.Invoke(CharacterType.ENEMY);
+                MouseLockManager.Instance.MouseLocked = true;
+                gameOver = true;
+            }
+
+            if(TeamMasterManager.Instance.Managers[CharacterType.ENEMY].Roster.Count == 0) {
+                GameOver?.Invoke(CharacterType.PLAYER);
+                MouseLockManager.Instance.MouseLocked = true;
+                gameOver = true;
+            }
         }
 
-        if(TeamMasterManager.Instance.Managers[CharacterType.ENEMY].Roster.Count == 0) {
-            Debug.LogWarning("YOU WIN!");
-        }
     }
 
     private void StartTurn() {

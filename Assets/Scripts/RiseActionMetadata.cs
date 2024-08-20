@@ -12,6 +12,6 @@ public class RiseActionMetadata : ActionMetadata
 
     public override string GetDescription(int adjacencyBonuses)
     {
-        return "Rise from the depths!";
+        return "Grow back to normal size to reenter the main battlefield";
     }
 }

@@ -13,6 +13,6 @@ public class MovementActionMetadata : TargetableActionMetadata
 
     public override string GetDescription(int adjacencyBonuses)
     {
-        return "Move " + Range.ToString() + " Spaces";
+        return "Move up to " + Range.ToString() + " spaces away";
     }
 }

@@ -18,6 +18,10 @@ public class EndTurnButtonController : MonoBehaviour, IPointerEnterHandler, IPoi
                 gameObject.SetActive(false);
             }
         };
+
+        GameManager.Instance.GameOver += (characterType) => {
+            gameObject.SetActive(false);
+        };
     }
 
     public void ButtonClicked() {

@@ -24,6 +24,9 @@ public class MoveCardController : MonoBehaviour, ISelectHandler, IPointerEnterHa
     [SerializeField]
     private Image background;
 
+    [SerializeField]
+    private Transform pivot;
+
     private CharacterManager characterManager;
 
     private ActionMetadata actionMetadata;
@@ -33,7 +36,7 @@ public class MoveCardController : MonoBehaviour, ISelectHandler, IPointerEnterHa
     public void Init(CharacterManager characterManager, ActionMetadata actionMetadata) {
 
         titleText.text = actionMetadata.Name;
-        descriptionText.text = actionMetadata.GetDescription(characterManager.GetAdjacencyBonuses());
+        descriptionText.text = actionMetadata.GetDescription(characterManager.GetAdjacencyBonuses()).ToUpper();
         costText.text = actionMetadata.Cost.ToString();
 
         characterActionController = actionMetadata.GetController(characterManager);
@@ -71,11 +74,11 @@ public class MoveCardController : MonoBehaviour, ISelectHandler, IPointerEnterHa
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        transform.DOScale(Vector3.one * 1.125f, .1f).SetEase(Ease.InOutSine);
+        pivot.DOScale(Vector3.one * 1.125f, .1f).SetEase(Ease.InOutSine);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        transform.DOScale(Vector3.one * (selectable.interactable ? 1f : .9f), .1f).SetEase(Ease.InOutSine);
+        pivot.DOScale(Vector3.one * (selectable.interactable ? 1f : .9f), .1f).SetEase(Ease.InOutSine);
     }
 }

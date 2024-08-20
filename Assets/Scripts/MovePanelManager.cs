@@ -19,6 +19,10 @@ public class MovePanelManager : Singleton<MovePanelManager>
                 Clear();
             }
         };
+
+        GameManager.Instance.GameOver += (characterType) => {
+            Clear();
+        };
     }
 
     public void Clear() {

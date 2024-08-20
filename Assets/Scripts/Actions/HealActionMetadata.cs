@@ -15,6 +15,6 @@ public class HealActionMetadata : TargetableActionMetadata
 
     public override string GetDescription(int adjacencyBonuses)
     {
-        return "Heal for " + (HealAmount + adjacencyBonuses).ToString();
+        return "Heal an adjacent ally for " + (HealAmount + adjacencyBonuses).ToString() + " health";
     }
 }

@@ -15,6 +15,6 @@ public class AttackActionMetadata : TargetableActionMetadata
 
     public override string GetDescription(int adjacencyBonuses)
     {
-        return "Attack an enemy for " + (Damage + adjacencyBonuses) + " damage";
+        return "Attack an adjacent enemy for " + (Damage + adjacencyBonuses) + " damage";
     }
 }

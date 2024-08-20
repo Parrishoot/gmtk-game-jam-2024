@@ -29,6 +29,10 @@ public class TurnUIController : Singleton<TurnUIController>
 
     void Start() {
         startingPos = transform.position;
+
+        GameManager.Instance.GameOver += (characterType) => {
+            gameObject.SetActive(false);
+        };
     }
 
     void Update() {
@@ -41,19 +45,6 @@ public class TurnUIController : Singleton<TurnUIController>
         transform.position = startingPos + Vector3.up * offsetAmount;
         transform.localScale = Vector3.one * .9f;
 
-        DOTween.Sequence()
-            .Append(transform.DOMove(startingPos, transitionTime / 2).SetEase(Ease.InOutCubic))
-            .Join(background.DOFade(1f, transitionTime / 2).SetEase(Ease.InOutCubic))
-            .Join(playerText.DOFade(1f, transitionTime / 2).SetEase(Ease.InOutCubic))
-            .Join(turnText.DOFade(1f, transitionTime / 2).SetEase(Ease.InOutCubic))
-            .Join(transform.DOScale(Vector3.one, transitionTime / 2).SetEase(Ease.InOutCubic))
-            .AppendInterval(transitionTime / 2)
-            .Append(transform.DOMove(startingPos + Vector3.down * offsetAmount, transitionTime / 2).SetEase(Ease.InOutCubic))
-            .Join(background.DOFade(0f, transitionTime / 2).SetEase(Ease.InOutCubic))
-            .Join(playerText.DOFade(0f, transitionTime / 2).SetEase(Ease.InOutCubic))
-            .Join(turnText.DOFade(0f, transitionTime / 2).SetEase(Ease.InOutCubic))
-            .Join(transform.DOScale(Vector3.one * .75f, transitionTime / 2).SetEase(Ease.InOutCubic))
-            .Play()
-            .OnComplete(() => AnimationFinished?.Invoke());
+        
     }
 }

@@ -13,6 +13,6 @@ public class DiveActionMetadata : TargetableActionMetadata
 
     public override string GetDescription(int adjacencyBonuses)
     {
-        return "Dive baby, dive!";
+        return "Shrink down to enter the lower battlefield on an adjacent hex";
     }
 }
