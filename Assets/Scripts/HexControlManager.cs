@@ -27,7 +27,13 @@ public class HexControlManager : MonoBehaviour
             _ => Color.white
         };
 
+        bool hidden = hexSpaceManager.MaterialController.IsHidden();
+
         hexSpaceManager.MaterialController.SetResetColor(color);
         hexSpaceManager.MaterialController.SetColor(color);
+
+        if(hidden) {
+            hexSpaceManager.MaterialController.Hide();
+        }
     }
 }

@@ -77,7 +77,7 @@ public class EnemyActionSelectState : GenericState<EnemyTurnManager>
 
     public override void OnUpdate(float deltaTime)
     {
-        if(Time.time - StartTime > 5) {
+        if(Time.time - StartTime > 4) {
             Debug.LogWarning("Enemy is softlocked - shouldn't have gotten here!");
             selectedAction.ActionEnded -= CheckEnd;
 

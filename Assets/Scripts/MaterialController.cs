@@ -55,6 +55,10 @@ public class MaterialController : MonoBehaviour
 
         ResetColor = newResetColor;
     }
+
+    public bool IsHidden() {
+        return meshRenderer.material.color.a != 1f;
+    }
 }
 
 
