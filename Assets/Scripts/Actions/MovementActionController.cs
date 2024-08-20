@@ -43,11 +43,6 @@ public class MovementActionController : TargetableActionController<MovementActio
         PerformAction(manager);
     }
 
-    protected override Color TargetColor()
-    {
-        return Color.yellow;
-    }
-
     private void EndAction()
     {
         ActionEnded?.Invoke();

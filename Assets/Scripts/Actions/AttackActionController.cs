@@ -9,11 +9,6 @@ public class AttackActionController : TargetableActionController<AttackActionMet
     {
     }
 
-    protected override Color TargetColor()
-    {
-        return Color.red;
-    }
-
     protected override bool IsValidTargetSpace(HexSpaceManager targetHex)
     {
         return targetHex.Occupant != null && 

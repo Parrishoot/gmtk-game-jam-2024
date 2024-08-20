@@ -31,6 +31,8 @@ where T: TargetableActionMetadata
             }
         }
 
+        MouseLockManager.Instance.MouseLocked = true;
+
         characterManager.TargetSelector.BeginSelection(this);
     }
 

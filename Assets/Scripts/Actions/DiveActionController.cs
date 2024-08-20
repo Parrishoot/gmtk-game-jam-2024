@@ -36,9 +36,4 @@ public class DiveActionController : TargetableActionController<DiveActionMetadat
 
         ActionEnded?.Invoke();
     }
-
-    protected override Color TargetColor()
-    {
-        return Color.blue;
-    }
 }

@@ -12,7 +12,9 @@ public abstract class TargetableActionControllerBase : CharacterActionController
     }
 
     
-    protected abstract Color TargetColor();
+    protected Color TargetColor() {
+        return ColorManager.Instance.TargetColor;
+    }
 
     protected abstract bool IsValidTargetSpace(HexSpaceManager targetHex);
 
@@ -31,6 +33,7 @@ public abstract class TargetableActionControllerBase : CharacterActionController
 
     public virtual void ProcessSelection(HexSpaceManager manager)
     {
+
         if(!TargetableHexes.Contains(manager)) {
             Debug.Log("Clicking hex without a valid target - not processing");
             return;
@@ -46,5 +49,6 @@ public abstract class TargetableActionControllerBase : CharacterActionController
             targetHex.MaterialController.ResetHexColor();
         }
         characterManager.TargetSelector.EndSelection(this);
+        MouseLockManager.Instance.MouseLocked = false;
     }
 }

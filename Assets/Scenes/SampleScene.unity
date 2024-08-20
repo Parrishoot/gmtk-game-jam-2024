@@ -272,7 +272,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.0001
   far clip plane: 1000
   field of view: 60
   orthographic: 1
@@ -1027,6 +1027,7 @@ GameObject:
   - component: {fileID: 970269067}
   - component: {fileID: 970269068}
   - component: {fileID: 970269069}
+  - component: {fileID: 970269070}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -1160,6 +1161,19 @@ MonoBehaviour:
   <PlayerHexColor>k__BackingField: {r: 0.1254902, g: 0.5176471, b: 0.70980394, a: 1}
   <EnemyHexColor>k__BackingField: {r: 0.9137255, g: 0.21568628, b: 0.2784314, a: 1}
   <ContestedColor>k__BackingField: {r: 0.40392157, g: 0.20392157, b: 0.5803922, a: 1}
+  <TargetColor>k__BackingField: {r: 0.9764706, g: 0.7882353, b: 0.08235294, a: 1}
+--- !u!114 &970269070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 970269059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 231a37ff266099d439237db438757fa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1189023745
 GameObject:
   m_ObjectHideFlags: 0
@@ -2026,10 +2040,11 @@ AudioSource:
   m_GameObject: {fileID: 1806889739}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -7271244468214655015, guid: c7c9643c97eb8c547816dfe4f216d2e0,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 4962084c0c67537438fe2a7432ecb0a2, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.3
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0

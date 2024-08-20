@@ -9,11 +9,6 @@ public class HealActionController : TargetableActionController<HealActionMetadat
     {
     }
 
-    protected override Color TargetColor()
-    {
-        return Color.green;
-    }
-
     protected override bool IsValidTargetSpace(HexSpaceManager targetHex)
     {
         return targetHex.Occupant != null && 
@@ -24,7 +19,7 @@ public class HealActionController : TargetableActionController<HealActionMetadat
 
     protected override void PerformAction(HexSpaceManager selectedHex)
     {
-        characterManager.AnimationController.Heal(() => End(selectedHex));
+        characterManager.AnimationController.Heal(selectedHex.OccupantPivot.position, () => End(selectedHex));
     }
 
     protected void End(HexSpaceManager selectedHex) {

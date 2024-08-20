@@ -30,7 +30,7 @@ public class PlayerActionSelectState : GenericState<PlayerTurnManager>
     private void CheckDisplayActions(HexSpaceManager manager)
     {
 
-        if(!manager.IsOccupied()) {
+        if(!manager.IsOccupied() || MouseLockManager.Instance.MouseLocked) {
             return;
         }
 
