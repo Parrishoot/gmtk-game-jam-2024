@@ -35,7 +35,7 @@ public class MoveCardController : MonoBehaviour, ISelectHandler, IPointerEnterHa
 
     public void Init(CharacterManager characterManager, ActionMetadata actionMetadata) {
 
-        titleText.text = actionMetadata.Name;
+        titleText.text = actionMetadata.Name.ToUpper();
         descriptionText.text = actionMetadata.GetDescription(characterManager.GetAdjacencyBonuses()).ToUpper();
         costText.text = actionMetadata.Cost.ToString();
 
