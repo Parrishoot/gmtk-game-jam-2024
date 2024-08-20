@@ -25,6 +25,6 @@ public class APUIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = "AP: " + TeamMasterManager.Instance.Managers[CharacterType.PLAYER].ActionPoints.ToString();
+        text.text = TeamMasterManager.Instance.Managers[CharacterType.PLAYER].ActionPoints.ToString();
     }
 }

@@ -6,10 +6,10 @@ using UnityEngine;
 
 public class CharacterAnimationController : MonoBehaviour
 {
-    public void Attack(Vector3 targetPos, Action OnComplete = null) {
+    public void Attack(Vector3 targetPos, Action OnAttack=null, Action OnComplete = null) {
         Vector3 startingPos = transform.position;
         DOTween.Sequence()
-          .Append(transform.DOMove(targetPos, .1f).SetEase(Ease.InCubic))
+          .Append(transform.DOMove(targetPos, .1f).SetEase(Ease.InCubic).OnComplete(() => OnAttack?.Invoke()))
           .Append(transform.DOMove(startingPos, .1f).SetEase(Ease.OutCubic))
           .OnComplete(() => OnComplete?.Invoke())
           .Play();
@@ -18,8 +18,8 @@ public class CharacterAnimationController : MonoBehaviour
     public void Heal(Action OnComplete = null) {
         Vector3 startingPos = transform.position;
         DOTween.Sequence()
-          .Append(transform.DOMove(startingPos + Vector3.up * .5f, .2f).SetEase(Ease.InSine))
-          .Append(transform.DOMove(startingPos, .1f).SetEase(Ease.OutSine))
+          .Append(transform.DOMove(startingPos + Vector3.up * .5f, .2f).SetEase(Ease.OutSine))
+          .Append(transform.DOMove(startingPos, .1f).SetEase(Ease.InSine))
           .OnComplete(() => OnComplete?.Invoke())
           .Play();
     }
@@ -45,5 +45,9 @@ public class CharacterAnimationController : MonoBehaviour
           .Join(transform.DOScale(Vector3.zero, .3f).SetEase(Ease.InSine))
           .OnComplete(() => OnComplete?.Invoke())
           .Play();
+    }
+
+    public void Damage(Action OnComplete = null) {
+        transform.DOShakePosition(.3f, .2f, 100).OnComplete(() => OnComplete?.Invoke());
     }
 }

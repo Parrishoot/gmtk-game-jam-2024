@@ -36,7 +36,9 @@ where T: TargetableActionMetadata
 
     public override void ProcessSelection(HexSpaceManager manager)
     {
-        TeamMasterManager.Instance.Managers[characterManager.CharacterType].SpendActionPoints(Meta.Cost);
+        if(TargetableHexes.Contains(manager)) {
+            TeamMasterManager.Instance.Managers[characterManager.CharacterType].SpendActionPoints(Meta.Cost);
+        }
         base.ProcessSelection(manager);
     }
 

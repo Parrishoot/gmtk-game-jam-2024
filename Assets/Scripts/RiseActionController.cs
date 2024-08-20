@@ -52,7 +52,7 @@ public class RiseActionController : CharacterActionControllerWithMetadata<RiseAc
         List<HexSpaceManager> neighbors = characterManager.Hex.ParentBoardManager.ContainingHex.GetAdjacentHexes();
 
         foreach(HexSpaceManager neighbor in neighbors) {
-            if(!neighbor.IsOccupied()) {
+            if(!neighbor.IsOccupied() && neighbor.ChildBoardManager.boardControlManager.ControlType == ControlType.EMPTY) {
                 targetHex = neighbor;
                 return;
             }

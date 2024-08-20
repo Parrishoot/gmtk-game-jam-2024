@@ -28,13 +28,18 @@ public class MoveCardController : MonoBehaviour, ISelectHandler, IPointerEnterHa
 
     private ActionMetadata actionMetadata;
 
+    private CharacterActionController characterActionController;
+
     public void Init(CharacterManager characterManager, ActionMetadata actionMetadata) {
 
         titleText.text = actionMetadata.Name;
         descriptionText.text = actionMetadata.GetDescription(characterManager.GetAdjacencyBonuses());
         costText.text = actionMetadata.Cost.ToString();
 
-        if(TeamMasterManager.Instance.Managers[characterManager.CharacterType].ActionPoints < actionMetadata.Cost) {
+        characterActionController = actionMetadata.GetController(characterManager);
+        characterActionController.Load();
+
+        if(TeamMasterManager.Instance.Managers[characterManager.CharacterType].ActionPoints < actionMetadata.Cost || !characterActionController.IsValid()) {
             selectable.interactable = false;
             
             Color color = Color.white;

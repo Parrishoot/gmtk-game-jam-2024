@@ -13,6 +13,14 @@ public class MovePanelManager : Singleton<MovePanelManager>
 
     private List<MoveCardController> currentCards = new List<MoveCardController>();
 
+    void Start() {
+         GameManager.Instance.TurnEnded += (characterType) => {
+            if (characterType == CharacterType.PLAYER) {
+                Clear();
+            }
+        };
+    }
+
     public void Clear() {
         foreach(MoveCardController moveCardController in currentCards) {
             Destroy(moveCardController.gameObject);
