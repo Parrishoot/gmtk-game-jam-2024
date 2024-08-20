@@ -18,6 +18,8 @@ public class RiseActionController : CharacterActionControllerWithMetadata<RiseAc
             return;
         }
 
+        TeamMasterManager.Instance.Managers[characterManager.CharacterType].SpendActionPoints(Meta.Cost);
+
         characterManager.AnimationController.Rise(End);
     }
 

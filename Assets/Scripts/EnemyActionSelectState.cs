@@ -11,6 +11,8 @@ public class EnemyActionSelectState : GenericState<EnemyTurnManager>
 
     private CharacterActionController selectedAction;
 
+    private float StartTime;
+
     public EnemyActionSelectState(EnemyTurnManager stateMachine) : base(stateMachine)
     {
     }
@@ -22,6 +24,8 @@ public class EnemyActionSelectState : GenericState<EnemyTurnManager>
 
     public override void OnStart()
     {
+        StartTime = Time.time;
+
         remainingActions = TOTAL_ACTIONS;
         ChooseAction();
     }
@@ -73,7 +77,13 @@ public class EnemyActionSelectState : GenericState<EnemyTurnManager>
 
     public override void OnUpdate(float deltaTime)
     {
-        
+        if(Time.time - StartTime > 5) {
+            Debug.LogWarning("Enemy is softlocked - shouldn't have gotten here!");
+            selectedAction.ActionEnded -= CheckEnd;
+
+            StateMachine.ChangeState(StateMachine.IdleState);
+            GameManager.Instance.EndCurrentTurn();
+        }
     }
 
     private void CheckEnd() {
