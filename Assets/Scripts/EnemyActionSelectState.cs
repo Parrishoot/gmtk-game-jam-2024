@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class EnemyActionSelectState : GenericState<EnemyTurnManager>
 {
+    int TOTAL_ACTIONS = 3;
+
+    int remainingActions;
 
     private CharacterActionController selectedAction;
 
@@ -14,11 +17,19 @@ public class EnemyActionSelectState : GenericState<EnemyTurnManager>
 
     public override void OnEnd()
     {
-        HexMasterManager.Instance.ZoomFinished -= BeginAction;
+        
     }
 
     public override void OnStart()
     {
+        remainingActions = TOTAL_ACTIONS;
+        ChooseAction();
+    }
+
+    private void ChooseAction() {
+        
+        HexMasterManager.Instance.ZoomFinished -= ChooseAction;
+
         List<CharacterManager> enemies = TeamMasterManager.Instance.Managers[CharacterType.ENEMY].Roster;
 
         // TODO: UPDATE THIS LOGIC
@@ -32,15 +43,17 @@ public class EnemyActionSelectState : GenericState<EnemyTurnManager>
         List<CharacterActionController> validActions = actionControllers.Where(x => x.IsValid()).ToList();
 
         if(validActions.Count == 0) {
-            End();
+            CheckEnd();
             return;
         }
+
+        remainingActions--;
 
         selectedAction = validActions.GetRandomSelection();
 
         Debug.Log("Enemy performing: " + selectedAction.GetType().ToString());
 
-        selectedAction.ActionEnded += End;
+        selectedAction.ActionEnded += CheckEnd;
 
         if(selectedEnemy.Hex.ParentBoardManager.ContainingHex != null &&
             HexMasterManager.Instance.ActiveHex != selectedEnemy.Hex.ParentBoardManager.ContainingHex) {
@@ -51,7 +64,6 @@ public class EnemyActionSelectState : GenericState<EnemyTurnManager>
         else {
             BeginAction();
         }
-
 
     }
 
@@ -64,8 +76,24 @@ public class EnemyActionSelectState : GenericState<EnemyTurnManager>
         
     }
 
-    private void End() {
-        StateMachine.ChangeState(StateMachine.IdleState);
-        GameManager.Instance.EndCurrentTurn();
+    private void CheckEnd() {
+
+        HexMasterManager.Instance.ZoomFinished -= BeginAction;
+
+        if(remainingActions == 0) {
+            StateMachine.ChangeState(StateMachine.IdleState);
+            GameManager.Instance.EndCurrentTurn();
+        }
+        else {
+            
+            if(HexMasterManager.Instance.ActiveHex != null) {
+                HexMasterManager.Instance.ZoomFinished += ChooseAction;
+                HexMasterManager.Instance.ZoomOut();
+                return;
+            }
+            else {
+                ChooseAction();
+            }
+        }
     }
 }
